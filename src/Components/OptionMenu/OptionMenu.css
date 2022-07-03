@@ -1,0 +1,55 @@
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin-right: 30px;
+}
+
+.option-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 3px;
+    cursor: pointer;
+    border-radius: 2px;
+    width: fit-content;
+}
+
+.option-menu:hover {
+    background-color: var(--dark-gray-color);
+}
+
+.option-menu i {
+    margin-left: 3px;
+}
+
+.open {
+    background-color: var(--dark-gray-color);
+}
+
+.option-btns {
+    display: flex;
+    width: fit-content;
+}
+
+.option-btn {
+    background-color: var(--gray-color);
+    padding: 8px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: var(--dark-gray-color);
+    border-radius: 2px;
+}
+
+.option-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.clicked {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}

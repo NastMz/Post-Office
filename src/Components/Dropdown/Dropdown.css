@@ -1,0 +1,20 @@
+.dropdown-list {
+    background-color: var(--secondary-color);
+    width: fit-content;
+    position: absolute;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.dropdown-list ul {
+    list-style: none;
+}
+
+.dropdown-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: var(--light-green);
+}

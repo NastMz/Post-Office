@@ -1,0 +1,92 @@
+nav {
+    height: 100%;
+    width: 300px;
+    overflow-y: auto;
+    background-color: var(--secondary-color);
+    overflow-x: hidden;
+    font-size: 1.2em;
+    padding: 30px;
+}
+
+.logo {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo span {
+    margin-left: 10px;
+}
+
+nav ul {
+    list-style: none;
+    width: 100%;
+}
+
+nav li {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    padding: 10px 15px;
+}
+
+nav li:hover {
+    background-color: var(--light-green);
+}
+
+nav li a {
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    margin-right: 10px;
+    color: var(--font-color);
+}
+
+nav li span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    padding: 2px 5px;
+    width: 35px;
+    border-radius: 2px;
+    font-size: 0.85em;
+}
+
+nav li i {
+    margin-right: 5px;
+}
+
+.new-email-btn {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.new-email-btn:hover {
+    background-color: var(--dark-main-color);
+}
+
+.new-email-btn span {
+    margin-right: 10px;
+}
+
+.selected {
+    background-color: var(--light-green);
+}

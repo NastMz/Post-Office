@@ -1,0 +1,13 @@
+main {
+    height: 100%;
+    width: 100%;
+    padding: 15px 15px 30px 15px;
+    margin: 0 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-page {
+    display: flex;
+    height: 100%;
+}

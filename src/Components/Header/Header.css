@@ -1,0 +1,30 @@
+header {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--font-color);
+    margin-bottom: 30px;
+}
+
+.page-name {
+    font-size: 1.5em;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.user i {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.user span {
+    font-size: .95em;
+}
+
