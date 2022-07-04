@@ -6,8 +6,6 @@ import {reducers} from "./ReducersNames";
 export function isActive(emailsReducer: string) {
     let emailActive = false;
 
-    console.log(store.getState());
-
     switch (emailsReducer) {
         case reducers[0]:
             for(const email of store.getState().emailsArchivedReducer) {

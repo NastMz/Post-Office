@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import './Navbar.css';
 import {Link, useLocation} from "react-router-dom";
 import {Paths} from '../../Utils/Paths';
@@ -7,17 +7,26 @@ import {store} from "../../Redux/store";
 
 export const Navbar: React.FC = () => {
 
+    const openPage = (index: number) => {
+        return {
+            type: '@navbar/openPage',
+            index: index
+        }
+    };
+
     const location = useLocation();
 
     let [unread, setUnread] = useState<number>(store.getState().emailsInboxReducer.filter(email => !email.read).length);
-    let [activeIndex, setActiveIndex] = useState<number>(0);
+    let [activeIndex, setActiveIndex] = useState<number>(store.getState().navbarReducer);
 
-    useEffect(() => {
-        const activeItem = Paths.findIndex(item => item.pathname === location.pathname);
-        setActiveIndex(activeItem);
-    }, [location]);
+    const handleClickOption = (index: number) => () => {
+        store.dispatch(openPage(index));
+    };
 
-    store.subscribe(() => {setUnread(store.getState().emailsInboxReducer.filter(email => !email.read).length)})
+    store.subscribe(() => {
+        setUnread(store.getState().emailsInboxReducer.filter(email => !email.read).length);
+        setActiveIndex(store.getState().navbarReducer);
+    })
 
     return (
         <nav>
@@ -31,10 +40,13 @@ export const Navbar: React.FC = () => {
             </div>
             <ul>
                 {
-                    Paths.map((route, index) => <li key={index} className={activeIndex === index ? 'selected' : ""}>
-                        <Link to={route.pathname}>{route.icon} {route.name}</Link>
-                        {index === 0 ? (unread > 0 ? <span>{unread}</span> : "") : ""}
-                    </li>)
+                    Paths.map((route) =>
+                        <li key={route.index} className={activeIndex === route.index ? 'selected' : ""}
+                            onClick={handleClickOption(route.index)}>
+                            <Link to={route.pathname}>{route.icon} {route.name}</Link>
+                            {route.index === 0 ? (unread > 0 ? <span>{unread}</span> : "") : ""}
+                        </li>
+                    )
                 }
             </ul>
         </nav>

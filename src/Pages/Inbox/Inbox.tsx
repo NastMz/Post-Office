@@ -5,14 +5,20 @@ import {reducers} from "../../Utils/Emails/ReducersNames";
 import {getActive, isActive} from "../../Utils/Emails/EmailUtils";
 import {MailReader} from "../../Components/MailReader/MailReader";
 import IEmail from "../../Models/Interfaces/IEmail";
+import {search} from "../../Utils/Emails/search";
 
 export const Inbox: React.FC = () => {
 
     const [state, updateState] = useState<Array<IEmail>>(store.getState().emailsInboxReducer);
-
-    useEffect(() => {console.log(state)}, [state]);
     // subscribing to the redux store
-    store.subscribe(() => updateState(store.getState().emailsInboxReducer))
+    store.subscribe(() => {
+        if (store.getState().searchBarReducer === ''){
+            updateState(store.getState().emailsInboxReducer);
+        }
+        else {
+            updateState(search(store.getState().emailsInboxReducer, store.getState().searchBarReducer))
+        }
+    });
 
     return (
         <div className={"mails-container"}>

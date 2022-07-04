@@ -174,7 +174,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                 <i className={`fa fa-arrow-right see`} onClick={handleClickCard(props.index)}></i>
             </div>
             <span className={"subject"}>{props.subject}</span>
-            <p className={"message"}>{props.message.length < 100 ? props.message : props.message.substring(0, 100).concat('...')}</p>
+            <p className={"message"}>{props.message.length < 100 ? props.message : props.message.substring(0, 200).concat('...')}</p>
             <div className={"email-footer"}>
                 <div className={"email-options"}>
                     <input type={"checkbox"}/>

@@ -1,11 +1,13 @@
 import {getArchivedEmails} from "../../API/EmailAPI";
 import IEmail from "../../Models/Interfaces/IEmail";
 
+const reducerName = `@emailArchived`;
+
 export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails(), action: any) => {
     switch (action.type) {
-        case '@emailArchived/create':
+        case `${reducerName}/create`:
             return [...state, action.payload]
-        case '@emailArchived/markAsRead':
+        case `${reducerName}/markAsRead`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -15,7 +17,7 @@ export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails()
                 }
                 return email;
             })
-        case '@emailArchived/markAsImportant':
+        case `${reducerName}/markAsImportant`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -25,7 +27,7 @@ export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails()
                 }
                 return email;
             })
-        case '@emailArchived/unmarkAsImportant':
+        case `${reducerName}/unmarkAsImportant`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -35,7 +37,7 @@ export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails()
                 }
                 return email;
             })
-        case '@emailArchived/unmarkAsArchive':
+        case `${reducerName}/unmarkAsArchive`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -45,9 +47,9 @@ export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails()
                 }
                 return email;
             })
-        case '@emailArchived/remove':
+        case `${reducerName}/remove`:
             return state.filter(email => email.index !== action.index);
-        case '@emailArchived/markAsActive':
+        case `${reducerName}/markAsActive`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -57,7 +59,7 @@ export const emailsArchivedReducer = (state: Array<IEmail> = getArchivedEmails()
                 }
                 return email;
             })
-        case '@emailArchived/unmarkAsActive':
+        case `${reducerName}/unmarkAsActive`:
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {

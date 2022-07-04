@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import './MainPage.css';
 import {Navbar} from "../Navbar/Navbar";
 import {Header} from "../Header/Header";
