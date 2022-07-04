@@ -3,11 +3,11 @@ import {dropdownReducer} from "./reducers/dropdownReducer";
 import {combineReducers} from "redux";
 import {btnReducer} from "./reducers/btnReducer";
 import {emailsInboxReducer} from "./reducers/emailsInboxReducer";
-import {emailsSendedReducer} from "./reducers/emailsSendedReducer";
+import {emailsSentReducer} from "./reducers/emailsSentReducer";
 
 export default combineReducers({
     emailsArchivedReducer,
-    emailsSendedReducer,
+    emailsSentReducer,
     emailsInboxReducer,
     dropdownReducer,
     btnReducer

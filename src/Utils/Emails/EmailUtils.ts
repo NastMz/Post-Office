@@ -6,31 +6,31 @@ import {reducers} from "./ReducersNames";
 export function isActive(emailsReducer: string) {
     let emailActive = false;
 
+    console.log(store.getState());
+
     switch (emailsReducer) {
         case reducers[0]:
-            store.getState().emailsArchivedReducer.some((email: IEmail) => {
+            for(const email of store.getState().emailsArchivedReducer) {
                 if (email.active) {
                     emailActive = email.active;
+                    break;
                 }
-                return false;
-            });
-            break
+            }
+            break;
         case reducers[1]:
-            store.getState().emailsSendedReducer.some((email: IEmail) => {
+            store.getState().emailsSentReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email.active;
                 }
-                return false;
             });
             break;
         case reducers[2]:
-            store.getState().emailsInboxReducer.some((email: IEmail) => {
+            store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email.active;
                 }
-                return false;
             });
-            break
+            break;
     }
 
     return emailActive;
@@ -41,29 +41,26 @@ export function getActive(emailsReducer: string) {
 
     switch (emailsReducer) {
         case reducers[0]:
-            store.getState().emailsArchivedReducer.some((email: IEmail) => {
+            store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;
                 }
-                return false;
             });
-            break
+            break;
         case reducers[1]:
-            store.getState().emailsSendedReducer.some((email: IEmail) => {
+            store.getState().emailsSentReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;
                 }
-                return false;
             });
             break;
         case reducers[2]:
-            store.getState().emailsInboxReducer.some((email: IEmail) => {
+            store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;
                 }
-                return false;
             });
-            break
+            break;
     }
 
     return emailActive;

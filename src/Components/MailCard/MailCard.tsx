@@ -14,7 +14,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
 
     const markAsRead = (index: number) => {
         return {
-            type: `@emailInbox/markAsRead`,
+            type: `@email${reducer}/markAsRead`,
             index: index
         }
     };
@@ -53,7 +53,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
     };
     const unmarkAsArchive = (index: number) => {
         return {
-            type: `@emailArchive/unmarkAsArchive`,
+            type: `@emailArchived/unmarkAsArchive`,
             index: index
         }
     };
@@ -84,27 +84,24 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
     const handleClickImportant = (index: number) => () => {
         switch (reducer) {
             case reducers[0]:
-                store.getState().emailsArchivedReducer.some(email => {
+                store.getState().emailsArchivedReducer.forEach(email => {
                     if (email.index === index) {
                         email.important ? store.dispatch(unmarkAsImportant(index)) : store.dispatch(markAsImportant(index));
                     }
-                    return false;
                 });
                 break;
             case reducers[1]:
-                store.getState().emailsSendedReducer.some(email => {
+                store.getState().emailsSentReducer.forEach(email => {
                     if (email.index === index) {
                         email.important ? store.dispatch(unmarkAsImportant(index)) : store.dispatch(markAsImportant(index));
                     }
-                    return false;
                 });
                 break;
             case reducers[2]:
-                store.getState().emailsInboxReducer.some(email => {
+                store.getState().emailsInboxReducer.forEach(email => {
                     if (email.index === index) {
                         email.important ? store.dispatch(unmarkAsImportant(index)) : store.dispatch(markAsImportant(index));
                     }
-                    return false;
                 });
                 break;
         }
@@ -113,33 +110,59 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
     const handleClickArchive = (index: number) => () => {
         switch (reducer) {
             case reducers[0]:
-                store.getState().emailsArchivedReducer.some(email => {
+                store.getState().emailsArchivedReducer.forEach(email => {
                     if (email.index === index) {
                         store.dispatch(unmarkAsArchive(index));
-                        store.dispatch(create(email, (email.context === 'send' ? 'Sended' : 'Inbox')));
+                        if (email.active) {
+                            store.dispatch(unmarkAsActive(index));
+                        }
+                    }
+                });
+                store.getState().emailsArchivedReducer.forEach(email => {
+                    if (email.index === index) {
+                        store.dispatch(create(email, (email.context === 'send' ? reducers[1] : reducers[2])));
                         store.dispatch(remove(index));
                     }
-                    return false;
                 });
                 break;
             case reducers[1]:
-                store.getState().emailsSendedReducer.some(email => {
+                store.getState().emailsSentReducer.forEach(email => {
                     if (email.index === index) {
                         store.dispatch(markAsArchive(index));
+                        if (email.active) {
+                            store.dispatch(unmarkAsActive(index));
+                        }
                     }
-                    return false;
+                });
+                store.getState().emailsSentReducer.forEach(email => {
+                    if (email.index === index) {
+                        store.dispatch(create(email, 'Archived'));
+                        store.dispatch(remove(index));
+                    }
                 });
                 break;
             case reducers[2]:
-                store.getState().emailsInboxReducer.some(email => {
+                store.getState().emailsInboxReducer.forEach(email => {
                     if (email.index === index) {
                         store.dispatch(markAsArchive(index));
+                        if (email.active) {
+                            store.dispatch(unmarkAsActive(index));
+                        }
                     }
-                    return false;
+                });
+                store.getState().emailsInboxReducer.forEach(email => {
+                    if (email.index === index) {
+                        store.dispatch(create(email, 'Archived'));
+                        store.dispatch(remove(index));
+                    }
                 });
                 break;
         }
     };
+
+    const handleClickDelete = (index: number) => () => {
+        store.dispatch(remove(index));
+    }
 
     return (
         <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}>
@@ -159,7 +182,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                        onClick={handleClickImportant(props.index)}></i>
                     <i className={`fa fa-envelope-open ${props.archive ? 'archive' : ''}`}
                        onClick={handleClickArchive(props.index)}></i>
-                    <i className={"fa fa-trash delete"}></i>
+                    <i className={"fa fa-trash delete"} onClick={handleClickDelete(props.index)}></i>
                 </div>
                 <div className={"date"}>
                     <span>{props.date}</span>

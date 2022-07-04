@@ -1,11 +1,21 @@
-import {getArchivedEmails, getSendedEmails} from "../../API/EmailAPI";
+import {getSentEmails} from "../../API/EmailAPI";
 import IEmail from "../../Models/Interfaces/IEmail";
 
-export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), action: any) => {
+export const emailsSentReducer = (state: Array<IEmail> = getSentEmails(), action: any) => {
     switch (action.type) {
-        case '@emailSended/create':
+        case '@emailSent/create':
             return [...state, action.payload]
-        case '@emailSended/markAsImportant':
+        case '@emailSent/markAsRead':
+            return state.map((email) => {
+                if (email.index === action.index) {
+                    return {
+                        ...email,
+                        read: true
+                    };
+                }
+                return email;
+            })
+        case '@emailSent/markAsImportant':
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -14,8 +24,8 @@ export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), ac
                     };
                 }
                 return email;
-            })
-        case '@emailSended/unmarkAsImportant':
+            });
+        case '@emailSent/unmarkAsImportant':
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -24,8 +34,8 @@ export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), ac
                     };
                 }
                 return email;
-            })
-        case '@emailSended/markAsArchive':
+            });
+        case '@emailSent/markAsArchive':
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -34,10 +44,10 @@ export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), ac
                     };
                 }
                 return email;
-            })
-        case '@emailSended/remove':
-            return {...state.filter(email => email.index !== action.index)}
-        case '@emailSended/markAsActive':
+            });
+        case '@emailSent/remove':
+            return state.filter(email => email.index !== action.index);
+        case '@emailSent/markAsActive':
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -46,8 +56,8 @@ export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), ac
                     };
                 }
                 return email;
-            })
-        case '@emailSended/unmarkAsActive':
+            });
+        case '@emailSent/unmarkAsActive':
             return state.map((email) => {
                 if (email.index === action.index) {
                     return {
@@ -56,7 +66,7 @@ export const emailsSendedReducer = (state: Array<IEmail> = getSendedEmails(), ac
                     };
                 }
                 return email;
-            })
+            });
         default:
             return state;
     }

@@ -1,1 +1,1 @@
-export const reducers = ['Archived' , 'Sended', 'Inbox'];
+export const reducers = ['Archived' , 'Sent', 'Inbox'];

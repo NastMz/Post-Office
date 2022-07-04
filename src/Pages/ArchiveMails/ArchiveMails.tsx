@@ -1,14 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {MailList} from "../../Components/MailList/MailList";
 import {MailReader} from "../../Components/MailReader/MailReader";
 import '../mails.css';
 import {store} from "../../Redux/store";
 import {getActive, isActive} from "../../Utils/Emails/EmailUtils";
 import {reducers} from "../../Utils/Emails/ReducersNames";
+import IEmail from "../../Models/Interfaces/IEmail";
 
 export const ArchiveMails: React.FC = () => {
 
-    const [state, updateState] = React.useState(store.getState().emailsArchivedReducer);
+    const [state, updateState] = useState<Array<IEmail>>(store.getState().emailsArchivedReducer);
     // subscribing to the redux store
     store.subscribe(() => updateState(store.getState().emailsArchivedReducer))
 
