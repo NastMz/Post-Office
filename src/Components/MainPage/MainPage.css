@@ -5,6 +5,7 @@ main {
     margin: 0 10px 10px 10px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .main-page {
