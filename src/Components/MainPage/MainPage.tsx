@@ -14,7 +14,7 @@ export const MainPage: React.FC<Props> = ({element}) => {
             <Navbar/>
             <main>
                 <Header/>
-                <MenuBar/>
+                <MenuBar />
                 {element}
             </main>
         </div>

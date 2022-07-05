@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from "react";
 import './SearchBar.css';
 import {store} from "../../Redux/store";
+import {searchIn} from "../../Utils/Reducers/reducersList";
 
 export const SearchBar: React.FC = () => {
-
-    const searchIn = (search: string) => {
-        return {
-            type: '@searchBar/search',
-            payload: search
-        }
-    };
 
     const [searchInput, setSearchInput] = useState<string>("");
 
     useEffect(() => {
         store.dispatch(searchIn(searchInput));
     }, [searchInput]);
+
+    store.subscribe(() => {
+        setSearchInput(store.getState().searchBarReducer);
+    });
 
     return (
         <div className='search-bar'>

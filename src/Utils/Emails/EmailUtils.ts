@@ -1,13 +1,13 @@
 import {store} from "../../Redux/store";
 import IEmail from "../../Models/Interfaces/IEmail";
 import Email from "../../Models/implements/Email";
-import {reducers} from "./ReducersNames";
+import {reducerNames} from "../Reducers/reducerNames";
 
 export function isActive(emailsReducer: string) {
     let emailActive = false;
 
     switch (emailsReducer) {
-        case reducers[0]:
+        case reducerNames[2]:
             for(const email of store.getState().emailsArchivedReducer) {
                 if (email.active) {
                     emailActive = email.active;
@@ -15,14 +15,14 @@ export function isActive(emailsReducer: string) {
                 }
             }
             break;
-        case reducers[1]:
+        case reducerNames[1]:
             store.getState().emailsSentReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email.active;
                 }
             });
             break;
-        case reducers[2]:
+        case reducerNames[0]:
             store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email.active;
@@ -38,21 +38,21 @@ export function getActive(emailsReducer: string) {
     let emailActive = new Email();
 
     switch (emailsReducer) {
-        case reducers[0]:
+        case reducerNames[2]:
             store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;
                 }
             });
             break;
-        case reducers[1]:
+        case reducerNames[1]:
             store.getState().emailsSentReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;
                 }
             });
             break;
-        case reducers[2]:
+        case reducerNames[0]:
             store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                 if (email.active) {
                     emailActive = email;

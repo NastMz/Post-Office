@@ -1,9 +1,16 @@
+import Path from "../../Models/Interfaces/IPath";
+
 const reducerName = `@navbar`;
 
-export const navbarReducer = (state: number = 0, action: any) => {
+const path = {
+    index: 0,
+    pathname: '/'
+}
+
+export const navbarReducer = (state: Path = path, action: any) => {
     switch (action.type) {
         case `${reducerName}/openPage`:
-            return action.index;
+            return action.payload;
         default:
             return state;
     }

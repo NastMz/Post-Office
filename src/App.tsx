@@ -1,9 +1,8 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 import './App.css';
 import React from "react";
 import {NotFound} from "./Pages/NotFound/NotFound";
-import {Paths} from "./Utils/Paths";
-import {store} from "./Redux/store";
+import {Paths} from "./Utils/Routes/Paths";
 
 function App() {
 

@@ -69,6 +69,40 @@ export const emailsSentReducer = (state: Array<IEmail> = getSentEmails(), action
                 }
                 return email;
             });
+        case `${reducerName}/markAsSelected`:
+            return state.map((email) => {
+                if (email.index === action.index) {
+                    return {
+                        ...email,
+                        selected: true
+                    };
+                }
+                return email;
+            });
+        case `${reducerName}/unmarkAsSelected`:
+            return state.map((email) => {
+                if (email.index === action.index) {
+                    return {
+                        ...email,
+                        selected: false
+                    };
+                }
+                return email;
+            });
+        case `${reducerName}/checkAll`:
+            return state.map((email) => {
+                return {
+                    ...email,
+                    selected: true
+                }
+            });
+        case `${reducerName}/uncheckAll`:
+            return state.map((email) => {
+                return {
+                    ...email,
+                    selected: false
+                }
+            });
         default:
             return state;
     }

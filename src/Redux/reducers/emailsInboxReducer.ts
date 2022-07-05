@@ -16,7 +16,7 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
         case `${reducerName}/markAsImportant`:
             return state.map((email) => {
                 if (email.index === action.index) {
@@ -26,7 +26,7 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
         case `${reducerName}/unmarkAsImportant`:
             return state.map((email) => {
                 if (email.index === action.index) {
@@ -36,7 +36,7 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
         case `${reducerName}/markAsArchive`:
             return state.map((email) => {
                 if (email.index === action.index) {
@@ -46,7 +46,7 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
         case `${reducerName}/remove`:
             return state.filter(email => email.index !== action.index);
         case `${reducerName}/markAsActive`:
@@ -58,7 +58,7 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
         case `${reducerName}/unmarkAsActive`:
             return state.map((email) => {
                 if (email.index === action.index) {
@@ -68,7 +68,41 @@ export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), acti
                     };
                 }
                 return email;
-            })
+            });
+        case `${reducerName}/markAsSelected`:
+            return state.map((email) => {
+                if (email.index === action.index) {
+                    return {
+                        ...email,
+                        selected: true
+                    };
+                }
+                return email;
+            });
+        case `${reducerName}/unmarkAsSelected`:
+            return state.map((email) => {
+                if (email.index === action.index) {
+                    return {
+                        ...email,
+                        selected: false
+                    };
+                }
+                return email;
+            });
+        case `${reducerName}/checkAll`:
+            return state.map((email) => {
+                    return {
+                        ...email,
+                        selected: true
+                    }
+                });
+        case `${reducerName}/uncheckAll`:
+            return state.map((email) => {
+                return {
+                    ...email,
+                    selected: false
+                }
+            });
         default:
             return state;
     }

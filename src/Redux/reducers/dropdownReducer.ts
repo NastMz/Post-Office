@@ -1,10 +1,12 @@
-import IOption from "../../Models/Interfaces/IOption";
+const reducerName = `@dropdown`;
 
-export const dropdownReducer = (state: IOption = {id: 1, name: 'Todo', selected: false}, action: any) => {
+export const dropdownReducer = (state: boolean  = false, action: any) => {
     switch (action.type) {
-        case '@dropdown/select':
-            return action.payload;
+        case `${reducerName}/open`:
+            return true;
+        case `${reducerName}/close`:
+            return false;
         default:
-            return {id: 1, name: 'Todo', selected: false};
+            return state;
     }
 }

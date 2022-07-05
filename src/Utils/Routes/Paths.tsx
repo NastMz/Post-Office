@@ -1,8 +1,8 @@
-import {Inbox} from "../Pages/Inbox/Inbox";
-import {MainPage} from "../Components/MainPage/MainPage";
+import {Inbox} from "../../Pages/Inbox/Inbox";
+import {MainPage} from "../../Components/MainPage/MainPage";
 import React from "react";
-import {SendMails} from "../Pages/SendMails/SendMails";
-import {ArchiveMails} from "../Pages/ArchiveMails/ArchiveMails";
+import {SendMails} from "../../Pages/SendMails/SendMails";
+import {ArchiveMails} from "../../Pages/ArchiveMails/ArchiveMails";
 
 export const Paths = [
     {

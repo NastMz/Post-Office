@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {MailList} from "../../Components/MailList/MailList";
 import {store} from "../../Redux/store";
-import {reducers} from "../../Utils/Emails/ReducersNames";
 import {getActive, isActive} from "../../Utils/Emails/EmailUtils";
 import {MailReader} from "../../Components/MailReader/MailReader";
 import IEmail from "../../Models/Interfaces/IEmail";
 import {search} from "../../Utils/Emails/search";
+import {reducerNames} from "../../Utils/Reducers/reducerNames";
 
 export const Inbox: React.FC = () => {
 
@@ -22,8 +22,8 @@ export const Inbox: React.FC = () => {
 
     return (
         <div className={"mails-container"}>
-            <MailList state={state} reducer={reducers[2]}/>
-            {isActive(reducers[2]) ? <MailReader props={getActive(reducers[2])}/> : ''}
+            <MailList state={state} reducer={reducerNames[0]}/>
+            {isActive(reducerNames[0]) ? <MailReader props={getActive(reducerNames[0])}/> : ''}
         </div>
     )
 };

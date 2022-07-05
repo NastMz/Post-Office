@@ -1,0 +1,1 @@
+export const reducerNames = ['Inbox', 'Sent', 'Archived'];

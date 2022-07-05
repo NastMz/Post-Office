@@ -1,41 +1,127 @@
 import './Dropdown.css';
 import React from "react";
 import {store} from "../../Redux/store";
-import IOption from "../../Models/Interfaces/IOption";
+import {options} from "../../Utils/Dropdown/Options";
+import {
+    checkAll,
+    closeDropdown,
+    isUncheck,
+    markAsSelected,
+    uncheckAll,
+    unmarkAsSelected
+} from "../../Utils/Reducers/reducersList";
+import IEmail from "../../Models/Interfaces/IEmail";
+import {reducerNames} from "../../Utils/Reducers/reducerNames";
 
 export const Dropdown: React.FC = () => {
 
-    const options = [
-        {
-            id: 1,
-            name: "Todo",
-            selected: false
-        },
-        {
-            id: 2,
-            name: "Ninguno",
-            selected: false
-        },
-        {
-            id: 3,
-            name: "Destacado",
-            selected: false
-        },
-        {
-            id: 4,
-            name: "Sin destacar",
-            selected: false
-        },
-    ]
+    const markAllAsSelected = () => {
+      switch (store.getState().navbarReducer.index) {
+          case 0:
+              store.dispatch(checkAll(reducerNames[0]));
+              break;
+          case 1:
+              store.dispatch(checkAll(reducerNames[1]));
+              break;
+          case 2:
+              store.dispatch(checkAll(reducerNames[2]));
+              break;
+      }
+    };
 
-    const selectOption = (option: IOption) => () => {
-        option.selected = true;
-        store.dispatch(
-            {
-                type: '@dropdown/select',
-                payload: option,
-            }
-        );
+    const unmarkAllAsSelected = () => {
+        switch (store.getState().navbarReducer.index) {
+            case 0:
+                store.dispatch(uncheckAll(reducerNames[0]));
+                break;
+            case 1:
+                store.dispatch(uncheckAll(reducerNames[1]));
+                break;
+            case 2:
+                store.dispatch(uncheckAll(reducerNames[2]));
+                break;
+        }
+    };
+
+    const markAllImportantAsSelected = () => {
+        switch (store.getState().navbarReducer.index) {
+            case 0:
+                store.getState().emailsInboxReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[0]));
+                    if (email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[0]));
+                    }
+                });
+                break;
+            case 1:
+                store.getState().emailsSentReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[1]));
+                    if (email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[1]));
+                    }
+                });
+                break;
+            case 2:
+                store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[2]));
+                    if (email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[2]));
+                    }
+                });
+                break;
+        }
+    };
+
+    const markAllUnimportantAsSelected = () => {
+        switch (store.getState().navbarReducer.index) {
+            case 0:
+                store.getState().emailsInboxReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[0]));
+                    if (!email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[0]));
+                    }
+                });
+                break;
+            case 1:
+                store.getState().emailsSentReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[1]));
+                    if (!email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[1]));
+                    }
+                });
+                break;
+            case 2:
+                store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
+                    store.dispatch(unmarkAsSelected(email.index, reducerNames[2]));
+                    if (!email.important){
+                        store.dispatch(markAsSelected(email.index, reducerNames[2]));
+                    }
+                });
+                break;
+        }
+    };
+
+    const handleClick = (option: number) => () => {
+        switch (option) {
+            case 1:
+                markAllAsSelected();
+                break;
+            case 2:
+                unmarkAllAsSelected();
+                break;
+            case 3:
+                markAllImportantAsSelected();
+                break;
+            case 4:
+                markAllUnimportantAsSelected();
+                break;
+        }
+        if (store.getState().checkedReducer){
+            store.dispatch(isUncheck());
+        }
+        else {
+            store.dispatch(closeDropdown());
+        }
     };
 
     return (
@@ -43,7 +129,7 @@ export const Dropdown: React.FC = () => {
             <ul>
                 {
                     options.map(option =>
-                        <li onClick={selectOption(option)} key={option.id}>{option.name}</li>
+                        <li onClick={handleClick(option.id)} key={option.id}>{option.name}</li>
                     )
                 }
             </ul>
