@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './SearchBar.css';
 import {store} from "../../Redux/store";
-import {searchIn} from "../../Utils/Reducers/reducersList";
+import {searchIn} from "../../Utils/ReducersUtils/reducersList";
 
 export const SearchBar: React.FC = () => {
 

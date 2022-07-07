@@ -1,7 +1,7 @@
 import './Dropdown.css';
-import React from "react";
+import React, {useRef} from "react";
 import {store} from "../../Redux/store";
-import {options} from "../../Utils/Dropdown/Options";
+import {options} from "../../Utils/DropdownUtils/Options";
 import {
     checkAll,
     closeDropdown,
@@ -9,11 +9,21 @@ import {
     markAsSelected,
     uncheckAll,
     unmarkAsSelected
-} from "../../Utils/Reducers/reducersList";
+} from "../../Utils/ReducersUtils/reducersList";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {reducerNames} from "../../Utils/Reducers/reducerNames";
+import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
 export const Dropdown: React.FC = () => {
+
+    const dropdownRef = useRef<any>(null);
+
+    const toggleDropdown = (e: MouseEvent)=>{
+        if(dropdownRef.current && store.getState().dropdownReducer && !dropdownRef.current.contains(e.target)){
+            store.dispatch(closeDropdown());
+        }
+    }
+
+    document.addEventListener('mousedown',toggleDropdown)
 
     const markAllAsSelected = () => {
       switch (store.getState().navbarReducer.index) {
@@ -125,7 +135,7 @@ export const Dropdown: React.FC = () => {
     };
 
     return (
-        <div className='dropdown-list'>
+        <div className='dropdown-list' ref={dropdownRef}>
             <ul>
                 {
                     options.map(option =>

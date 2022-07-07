@@ -16,9 +16,9 @@ import {
     unmarkAsActive,
     unmarkAsArchive,
     unmarkAsImportant
-} from "../../Utils/Reducers/reducersList";
+} from "../../Utils/ReducersUtils/reducersList";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {reducerNames} from "../../Utils/Reducers/reducerNames";
+import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
 export const OptionMenu: React.FC = () => {
 
@@ -221,7 +221,7 @@ export const OptionMenu: React.FC = () => {
                         <i className="fa fa-star"></i>
                     </div>
                     <div className={`option-btn`} onClick={handleClickArchive}>
-                        <i className="fa fa-envelope-open"></i>
+                        <i className="fa fa-archive"></i>
                     </div>
                     <div className={`option-btn`} onClick={handleClickDelete}>
                         <i className="fa fa-trash"></i>

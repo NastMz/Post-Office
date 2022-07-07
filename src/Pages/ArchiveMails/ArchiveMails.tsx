@@ -3,10 +3,10 @@ import {MailList} from "../../Components/MailList/MailList";
 import {MailReader} from "../../Components/MailReader/MailReader";
 import '../mails.css';
 import {store} from "../../Redux/store";
-import {getActive, isActive} from "../../Utils/Emails/EmailUtils";
+import {getActive, isActive} from "../../Utils/EmailsUtils/EmailUtils";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {search} from "../../Utils/Emails/search";
-import {reducerNames} from "../../Utils/Reducers/reducerNames";
+import {search} from "../../Utils/EmailsUtils/search";
+import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
 export const ArchiveMails: React.FC = () => {
 

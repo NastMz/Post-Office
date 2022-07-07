@@ -1,13 +1,20 @@
 import React, {useEffect, useState} from "react";
 import './Navbar.css';
 import {Link, useLocation} from "react-router-dom";
-import {Paths} from '../../Utils/Routes/Paths';
+import {Paths} from '../../Utils/RoutesUtils/Paths';
 import Logo from "../Logo/Logo";
 import {store} from "../../Redux/store";
-import {closeDropdown, isUncheck, openPage, resetSearch, unmarkAsSelected} from "../../Utils/Reducers/reducersList";
+import {
+    closeDropdown,
+    isUncheck,
+    openMailBox,
+    openPage,
+    resetSearch,
+    unmarkAsSelected
+} from "../../Utils/ReducersUtils/reducersList";
 import Path from "../../Models/Interfaces/IPath";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {reducerNames} from "../../Utils/Reducers/reducerNames";
+import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
 export const Navbar: React.FC = () => {
 
@@ -49,6 +56,10 @@ export const Navbar: React.FC = () => {
         store.dispatch(openPage(path));
     };
 
+    const handleClickRedact = () => {
+      store.dispatch(openMailBox());
+    };
+
     useEffect(() => {
         if (location.pathname !== activeIndex.pathname) {
             store.dispatch(openPage(Paths.filter(path => path.pathname === location.pathname)[0]));
@@ -66,7 +77,7 @@ export const Navbar: React.FC = () => {
                 <Logo/>
                 <span>MASSMAIL</span>
             </div>
-            <div className="new-email-btn" id="new-email-btn">
+            <div className="new-email-btn" onClick={handleClickRedact}>
                 <span>Redactar</span>
                 <i className={"fa fa-plus-circle"}></i>
             </div>

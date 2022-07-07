@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {MailList} from "../../Components/MailList/MailList";
 import {store} from "../../Redux/store";
-import {getActive, isActive} from "../../Utils/Emails/EmailUtils";
+import {getActive, isActive} from "../../Utils/EmailsUtils/EmailUtils";
 import {MailReader} from "../../Components/MailReader/MailReader";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {search} from "../../Utils/Emails/search";
-import {reducerNames} from "../../Utils/Reducers/reducerNames";
+import {search} from "../../Utils/EmailsUtils/search";
+import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
 export const Inbox: React.FC = () => {
 

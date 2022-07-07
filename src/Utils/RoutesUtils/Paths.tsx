@@ -22,7 +22,7 @@ export const Paths = [
     {
         index: 2,
         name: 'Archivados',
-        icon: <i className='fa fa-envelope-open'></i>,
+        icon: <i className='fa fa-archive'></i>,
         pathname: '/archive',
         element: <MainPage element={<ArchiveMails/>}/>
     }

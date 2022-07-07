@@ -2,7 +2,7 @@ import React from "react";
 import './MailList.css';
 import IEmail from "../../Models/Interfaces/IEmail";
 import {MailCard} from "../MailCard/MailCard";
-import {isActive} from "../../Utils/Emails/EmailUtils";
+import {isActive} from "../../Utils/EmailsUtils/EmailUtils";
 
 interface Props {
     state: IEmail[],

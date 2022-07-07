@@ -2,7 +2,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom';
 import './App.css';
 import React from "react";
 import {NotFound} from "./Pages/NotFound/NotFound";
-import {Paths} from "./Utils/Routes/Paths";
+import {Paths} from "./Utils/RoutesUtils/Paths";
 
 function App() {
 

@@ -80,8 +80,8 @@
     color: var(--archive-color);
 }
 
-.email-options input, .email-options .fa-star, .email-options .fa-envelope-open {
-    margin: 0 5px 0 0;
+.email-options input, .email-options .fa {
+    margin: 0 5px;
 }
 
 .email-options {
@@ -108,3 +108,4 @@
 .active .date, .active .subject, .active .user-from .fa, .active .see {
     color: var(--secondary-color);
 }
+

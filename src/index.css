@@ -19,6 +19,7 @@ body {
     color: var(--font-color);
     font-family: 'Roboto', sans-serif;
     font-size: 1vw;
+    user-select: none;
 }
 
 @media (max-width:  1300px) and (min-width: 900px) {

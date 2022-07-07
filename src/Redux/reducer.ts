@@ -6,6 +6,7 @@ import {emailsSentReducer} from "./reducers/emailsSentReducer";
 import {navbarReducer} from "./reducers/navbarReducer";
 import {searchBarReducer} from "./reducers/searchBarReducer";
 import {checkedReducer} from "./reducers/checkedReducer";
+import {sendMailBoxReducer} from "./reducers/sendMailBoxReducer";
 
 export default combineReducers({
     emailsArchivedReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     navbarReducer,
     checkedReducer,
     searchBarReducer,
-    dropdownReducer
+    dropdownReducer,
+    sendMailBoxReducer
 });
