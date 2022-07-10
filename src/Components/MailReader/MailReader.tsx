@@ -1,14 +1,29 @@
 import React from "react";
 import './MailReader.css';
 import IEmail from "../../Models/Interfaces/IEmail";
+import {getActive} from "../../Utils/EmailsUtils/EmailUtils";
+import {store} from "../../Redux/store";
+import {unmarkAsActive} from "../../Utils/ReducersUtils/reducersList";
 
 interface Props {
-    props: IEmail
+    props: IEmail,
+    reducer: string
 }
 
-export const MailReader: React.FC<Props> = ({props}) => {
+export const MailReader: React.FC<Props> = ({props, reducer}) => {
+
+    const handleClose = () => {
+        if (getActive(reducer).index === props.index) {
+            store.dispatch(unmarkAsActive(props.index, reducer));
+        }
+    }
+
     return (
         <div className={`mail ${props.active ? "open-mail" : ''}`}>
+            <div className={'close-icon'}>
+                <i className={`fa fa-arrow-left`}
+                   onClick={handleClose}></i>
+            </div>
             <div className={"email-title"}>
                 <span className={"email-subject"}>{props.subject}</span>
             </div>

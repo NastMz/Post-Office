@@ -170,6 +170,43 @@ const resetMailBox = () => {
   }
 }
 
+const showAlert = () => {
+    return {
+        type: `@alert/open`
+    }
+}
+
+const closeAlert = () => {
+    return {
+        type: `@alert/close`
+    }
+}
+
+const setAlertMessage = (message: Array<string>) => {
+  return {
+      type: `@alert/message`,
+      payload: message
+  }
+}
+
+const resetAlertMessage = () => {
+    return {
+        type: `@alert/resetMessage`
+    }
+}
+
+const alertDelete = () => {
+    return {
+        type: `@alert/isDeleting`
+    }
+}
+
+const deleteDone = () => {
+    return {
+        type: `@alert/deleteDone`
+    }
+}
+
 export {
     openPage,
     closeDropdown,
@@ -196,5 +233,11 @@ export {
     maximizeMailBox,
     minimizeMailBox,
     setMailbox,
-    resetMailBox
+    resetMailBox,
+    showAlert,
+    closeAlert,
+    setAlertMessage,
+    resetAlertMessage,
+    alertDelete,
+    deleteDone
 }

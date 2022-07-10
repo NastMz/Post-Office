@@ -194,39 +194,39 @@ export const OptionMenu: React.FC = () => {
         }
     };
 
-        const setStatusChecked = () => {
-            if (isChecked !== store.getState().checkedReducer) {
-                setChecked(store.getState().checkedReducer);
-            }
+    const setStatusChecked = () => {
+        if (isChecked !== store.getState().checkedReducer) {
+            setChecked(store.getState().checkedReducer);
         }
+    }
 
-        store.subscribe(() => {
-            setOpen(store.getState().dropdownReducer);
-            setStatusChecked();
-        });
+    store.subscribe(() => {
+        setOpen(store.getState().dropdownReducer);
+        setStatusChecked();
+    });
 
-        return (
-            <div className="options">
-                <div className={`option-menu ${isOpen ? "open" : ""}`}>
-                    <div className="dropdown-header">
-                        <input type='checkbox' checked={isChecked} onChange={e => setChecked(e.target.checked)}/>
-                        <i className="fa fa-caret-down" onClick={displayDropdown}></i>
-                    </div>
-                    <div className="dropdown-list-container">
-                        {isOpen ? <Dropdown/> : ""}
-                    </div>
+    return (
+        <div className="options">
+            <div className={`option-menu ${isOpen ? "open" : ""}`}>
+                <div className="dropdown-header">
+                    <input type='checkbox' checked={isChecked} onChange={e => setChecked(e.target.checked)}/>
+                    <i className="fa fa-caret-down" onClick={displayDropdown}></i>
                 </div>
-                <div className="option-btns">
-                    <div className={`option-btn`} onClick={handleClickImportant}>
-                        <i className="fa fa-star"></i>
-                    </div>
-                    <div className={`option-btn`} onClick={handleClickArchive}>
-                        <i className="fa fa-archive"></i>
-                    </div>
-                    <div className={`option-btn`} onClick={handleClickDelete}>
-                        <i className="fa fa-trash"></i>
-                    </div>
+                <div className="dropdown-list-container">
+                    {isOpen ? <Dropdown/> : ""}
                 </div>
             </div>
-        )
-    };
+            <div className="option-btns">
+                <div className={`option-btn`} onClick={handleClickImportant}>
+                    <i className="fa fa-star"></i>
+                </div>
+                <div className={`option-btn`} onClick={handleClickArchive}>
+                    <i className="fa fa-archive"></i>
+                </div>
+                <div className={`option-btn`} onClick={handleClickDelete}>
+                    <i className="fa fa-trash"></i>
+                </div>
+            </div>
+        </div>
+    )
+};

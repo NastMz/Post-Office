@@ -23,7 +23,7 @@ export const Inbox: React.FC = () => {
     return (
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[0]}/>
-            {isActive(reducerNames[0]) ? <MailReader props={getActive(reducerNames[0])}/> : ''}
+            {isActive(reducerNames[0]) ? <MailReader props={getActive(reducerNames[0])} reducer={reducerNames[0]}/> : ''}
         </div>
     )
 };

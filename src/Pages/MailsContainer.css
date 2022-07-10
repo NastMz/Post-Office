@@ -6,4 +6,6 @@
     height: 100%;
     overflow-y: auto;
     user-select: text;
+    justify-content: space-between;
+    align-items: center;
 }

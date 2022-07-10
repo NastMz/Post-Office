@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {MailList} from "../../Components/MailList/MailList";
 import {MailReader} from "../../Components/MailReader/MailReader";
-import '../mails.css';
+import '../MailsContainer.css';
 import {store} from "../../Redux/store";
 import {getActive, isActive} from "../../Utils/EmailsUtils/EmailUtils";
 import IEmail from "../../Models/Interfaces/IEmail";
@@ -24,7 +24,7 @@ export const ArchiveMails: React.FC = () => {
     return (
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[2]}/>
-            {isActive(reducerNames[2]) ? <MailReader props={getActive(reducerNames[2])}/> : ''}
+            {isActive(reducerNames[2]) ? <MailReader props={getActive(reducerNames[2])}  reducer={reducerNames[2]}/> : ''}
         </div>
     )
 };

@@ -5,9 +5,11 @@ import {
     add,
     closeMailBox,
     maximizeMailBox,
-    minimizeMailBox,
+    minimizeMailBox, resetAlertMessage,
     resetMailBox,
-    setMailbox
+    setAlertMessage,
+    setMailbox,
+    showAlert
 } from "../../Utils/ReducersUtils/reducersList";
 import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
@@ -43,30 +45,34 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
     };
 
     const handleClickClose = () => {
+        store.dispatch(resetAlertMessage());
         store.dispatch(closeMailBox());
         setTimeout(() => store.dispatch(resetMailBox()), 500);
     };
 
-    function checkForm() {
+    const checkForm = () => {
         let alert: Array<string> = [];
         if (toEmail === '') {
-            alert.push('Por favor introduce el destinatario');
+            alert.push('Por favor introduce un destinatario');
         }
         if (subjectEmail === '') {
-            alert.push('Por favor introduce el asunto');
+            alert.push('Por favor introduce un asunto');
         }
         if (messageEmail === '') {
             alert.push('Por favor introduce un mensaje');
         }
-        return alert;
+
+        store.dispatch(setAlertMessage(alert));
     }
 
     const handleClickSend = () => {
-        let alert = checkForm();
-        if (alert.length === 0) {
+        checkForm();
+        if (store.getState().alertReducer.message === '') {
             store.dispatch(add(store.getState().sendMailBoxReducer['email'], reducerNames[1]));
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
+        } else {
+            store.dispatch(showAlert());
         }
     };
 

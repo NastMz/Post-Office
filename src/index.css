@@ -3,6 +3,11 @@
     src: url("Assets/fonts/Roboto/Roboto-Regular.ttf");
 }
 
+@font-face {
+    font-family: Gesta;
+    src: url("Assets/fonts/Gesta/Gesta Condensed.ttf");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +22,7 @@ html {
 body {
     background-color: var(--background-color);
     color: var(--font-color);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Gesta', 'Roboto', sans-serif;
     font-size: 1vw;
     user-select: none;
 }

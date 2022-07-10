@@ -4,6 +4,7 @@
     position: absolute;
     padding: 10px;
     border-radius: 3px;
+    z-index: 1;
 }
 
 .dropdown-list ul {

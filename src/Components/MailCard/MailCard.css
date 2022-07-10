@@ -93,7 +93,7 @@
 }
 
 .email-options .delete:hover {
-    color: red;
+    color: var(--red-color);
 }
 
 .read {
@@ -107,5 +107,11 @@
 
 .active .date, .active .subject, .active .user-from .fa, .active .see {
     color: var(--secondary-color);
+}
+
+@media (max-width: 700px) {
+    .mail-card {
+        padding: 10px 15px;
+    }
 }
 

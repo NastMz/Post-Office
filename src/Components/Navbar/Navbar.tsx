@@ -57,7 +57,7 @@ export const Navbar: React.FC = () => {
     };
 
     const handleClickRedact = () => {
-      store.dispatch(openMailBox());
+        store.dispatch(openMailBox());
     };
 
     useEffect(() => {

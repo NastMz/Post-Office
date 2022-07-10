@@ -1,8 +1,8 @@
 .options {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 50%;
+    width: 100%;
     margin-right: 30px;
 }
 
@@ -12,7 +12,6 @@
     align-items: center;
     padding: 2px 3px;
     cursor: pointer;
-    border-radius: 2px;
     width: fit-content;
 }
 
@@ -36,7 +35,7 @@
 .option-btn {
     background-color: var(--gray-color);
     padding: 8px;
-    margin: 0 3px;
+    margin: 0 3px 0 0;
     cursor: pointer;
     color: var(--dark-gray-color);
     border-radius: 2px;
@@ -52,4 +51,14 @@
     background-color: var(--secondary-color);
     color: var(--main-color);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+@media (max-width: 700px) {
+    .option-btn {
+        padding: 4px;
+    }
+
+    .options {
+        margin-right: 10px;
+    }
 }

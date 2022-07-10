@@ -24,7 +24,7 @@ export const SendMails: React.FC = () => {
         //<Navigation />
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[1]}/>
-            {isActive(reducerNames[1]) ? <MailReader props={getActive(reducerNames[1])}/> : ''}
+            {isActive(reducerNames[1]) ? <MailReader props={getActive(reducerNames[1])}  reducer={reducerNames[1]}/> : ''}
         </div>
     )
 };

@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './MailCard.css';
 import IEmail from "../../Models/Interfaces/IEmail";
 import {store} from "../../Redux/store";
 import {getActive} from "../../Utils/EmailsUtils/EmailUtils";
 import {
-    add,
+    add, deleteDone,
     markAsActive,
-    unmarkAsActive,
     markAsArchive,
     markAsImportant,
     markAsRead,
-    remove,
+    markAsSelected,
+    remove, setAlertMessage, showAlert,
+    unmarkAsActive,
     unmarkAsArchive,
-    unmarkAsImportant, unmarkAsSelected, markAsSelected
+    unmarkAsImportant,
+    unmarkAsSelected
 } from "../../Utils/ReducersUtils/reducersList";
 import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
 
@@ -22,6 +24,9 @@ interface Props {
 }
 
 export const MailCard: React.FC<Props> = ({props, reducer}) => {
+
+    const [isDeleting, setDeleting] = useState<boolean>(false);
+    const [deleteIndex, setDeleteIndex] = useState<number>(-1);
 
     const handleClickCard = (index: number) => () => {
         if (getActive(reducer).index === index) {
@@ -139,8 +144,22 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
     };
 
     const handleClickDelete = (index: number) => () => {
-        store.dispatch(remove(index, reducer));
+        store.dispatch(setAlertMessage(['¿Esta seguro que desea eliminar este correo?']));
+        store.dispatch(showAlert());
+        setDeleteIndex(index);
     }
+
+    useEffect(() => {
+        if (isDeleting){
+            store.dispatch(remove(deleteIndex, reducer));
+            store.dispatch(deleteDone());
+            setDeleteIndex(-1);
+        }
+    }, [isDeleting]);
+
+    store.subscribe(() => {
+        setDeleting(store.getState().alertReducer.delete);
+    });
 
     return (
         <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}>
@@ -149,7 +168,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                     <i className={"fa fa-user-circle"}></i>
                     <span className="from">{props.name}</span>
                 </div>
-                <i className={`fa ${props.active ? 'fa-arrow-left' : 'fa-arrow-right'} see`} onClick={handleClickCard(props.index)}></i>
+                <i className={`fa fa-arrow-right see`} onClick={handleClickCard(props.index)}></i>
             </div>
             <span className={"subject"}>{props.subject}</span>
             <p className={"message"}>{props.message.length < 100 ? props.message : props.message.substring(0, 200).concat('...')}</p>

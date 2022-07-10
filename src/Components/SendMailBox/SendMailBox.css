@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .open {
@@ -52,12 +53,13 @@
     font-size: 1.1em;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .mail-box-body {
     max-height: 500px;
     width: 100%;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow-y: hidden;
 }
 
@@ -83,9 +85,13 @@
     height: 300px;
     resize: none;
     outline: none;
-    border: none;
+    border: 1px solid var(--gray-color);
     padding: 10px;
     overflow-y: auto;
+}
+
+.mail-form textarea:focus {
+    border: 2px solid var(--main-color);
 }
 
 .btns-box {
@@ -108,4 +114,19 @@
 
 .send-btn:hover {
     background-color: var(--dark-main-color);
+}
+
+@media (max-width: 700px){
+    .mail-box {
+        width: 90vw;
+        right: calc(10vw/2);
+    }
+
+    .open {
+        max-height: 400px;
+    }
+
+    .mail-box textarea {
+        height: 200px;
+    }
 }

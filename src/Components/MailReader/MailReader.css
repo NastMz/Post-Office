@@ -1,16 +1,17 @@
 .mail {
-    max-width: 0;
+    width: 0;
     height: 100%;
     overflow-y: auto;
-    margin-left: 30px;
     background-color: var(--secondary-color);
     transition: 0.5s;
     overflow-x: hidden;
+    padding: 10px 30px 30px 30px;
+    transform: scaleX(0);
 }
 
 .open-mail {
-    max-width: 800px !important;
-    padding: 20px 30px 30px 30px;
+    width: 100% !important;
+    transform: scaleX(1);
 }
 
 .email-title {
@@ -59,5 +60,21 @@
 .email-message {
     margin-top: 40px;
     color: var(--dark-gray-color);
+}
+
+.close-icon {
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+}
+
+.close-icon:hover {
+    color: var(--main-color);
+}
+
+@media (max-width: 700px) {
+    .mail {
+        padding: 10px 15px 15px 15px;
+    }
 }
 
