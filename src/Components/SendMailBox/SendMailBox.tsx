@@ -115,7 +115,7 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
                     </div>
                     <div className={`btns-box`}>
                         <div className={'send-btn'} onClick={handleClickSend}>
-                            <span>Send</span>
+                            <span>Enviar</span>
                         </div>
                     </div>
                 </form>

@@ -4,3 +4,9 @@
     justify-content: space-between;
     align-items: center;
 }
+
+@media (max-width: 700px) {
+    .menu-bar {
+        flex-wrap: wrap;
+    }
+}

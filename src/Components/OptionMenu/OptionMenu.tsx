@@ -6,12 +6,15 @@ import {
     add,
     checkAll,
     closeDropdown,
+    deleteDone,
     isCheck,
     isUncheck,
     markAsArchive,
     markAsImportant,
     openDropdown,
     remove,
+    setAlertMessage,
+    showAlert,
     uncheckAll,
     unmarkAsActive,
     unmarkAsArchive,
@@ -24,6 +27,7 @@ export const OptionMenu: React.FC = () => {
 
     const [isOpen, setOpen] = useState<boolean>(store.getState().dropdownReducer);
     const [isChecked, setChecked] = useState<boolean>(false);
+    const [isDeleting, setDeleting] = useState<boolean>(false);
 
     const checks = () => {
         let name: string = '';
@@ -169,29 +173,8 @@ export const OptionMenu: React.FC = () => {
     };
 
     const handleClickDelete = () => {
-        switch (store.getState().navbarReducer.index) {
-            case 0:
-                store.getState().emailsInboxReducer.forEach((email: IEmail) => {
-                    if (email.selected) {
-                        store.dispatch(remove(email.index, reducerNames[0]));
-                    }
-                });
-                break;
-            case 1:
-                store.getState().emailsSentReducer.forEach((email: IEmail) => {
-                    if (email.selected) {
-                        store.dispatch(remove(email.index, reducerNames[1]));
-                    }
-                });
-                break;
-            case 2:
-                store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
-                    if (email.selected) {
-                        store.dispatch(remove(email.index, reducerNames[2]));
-                    }
-                });
-                break;
-        }
+        store.dispatch(setAlertMessage(['¿Esta seguro que desea eliminar estos correos?']));
+        store.dispatch(showAlert());
     };
 
     const setStatusChecked = () => {
@@ -200,9 +183,43 @@ export const OptionMenu: React.FC = () => {
         }
     }
 
+    const deleteItems = () => {
+        if (isDeleting) {
+            switch (store.getState().navbarReducer.index) {
+                case 0:
+                    store.getState().emailsInboxReducer.forEach((email: IEmail) => {
+                        if (email.selected) {
+                            store.dispatch(remove(email.index, reducerNames[0]));
+                        }
+                    });
+                    break;
+                case 1:
+                    store.getState().emailsSentReducer.forEach((email: IEmail) => {
+                        if (email.selected) {
+                            store.dispatch(remove(email.index, reducerNames[1]));
+                        }
+                    });
+                    break;
+                case 2:
+                    store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
+                        if (email.selected) {
+                            store.dispatch(remove(email.index, reducerNames[2]));
+                        }
+                    });
+                    break;
+            }
+            store.dispatch(deleteDone());
+        }
+    }
+
+    useEffect(() => {
+        deleteItems();
+    }, [isDeleting]);
+
     store.subscribe(() => {
         setOpen(store.getState().dropdownReducer);
         setStatusChecked();
+        setDeleting(store.getState().alertReducer.delete);
     });
 
     return (

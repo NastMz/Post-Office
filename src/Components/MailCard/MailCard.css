@@ -76,7 +76,7 @@
     color: var(--notification-color);
 }
 
-.archive, .email-options .fa-envelope-open:hover {
+.archive, .email-options .fa-archive:hover {
     color: var(--archive-color);
 }
 

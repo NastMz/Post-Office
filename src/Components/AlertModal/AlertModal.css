@@ -1,0 +1,86 @@
+.alert-modal-background {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.alert-modal-container {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.alert-modal {
+    background-color: var(--secondary-color);
+    height: 250px;
+    width: 450px;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px;
+    border-radius: 2px;
+}
+
+.alert-title {
+    color: var(--main-color);
+    font-size: 1.8em;
+}
+
+.alert-btn {
+    background-color: var(--main-color);
+    padding: 10px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.alert-btn:hover {
+    background-color: var(--dark-main-color);
+}
+
+.show {
+    transform: scale(1);
+}
+
+.hidde {
+    transform: scale(0);
+    opacity: 0;
+}
+
+.alert-message {
+    font-size: 0.95em;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.close-alert-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 6px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.close-alert-btn:hover {
+    color: var(--red-color);
+}
+
+@media (max-width: 700px) {
+    .alert-modal {
+        height: 180px;
+        width: 280px;
+    }
+}
+
+
+
+

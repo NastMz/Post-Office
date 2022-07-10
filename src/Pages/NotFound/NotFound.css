@@ -1,0 +1,141 @@
+.not-found {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.container {
+    z-index: 1;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.error .fa {
+    font-size: 10em;
+}
+
+.error-number {
+    font-size: 12em;
+}
+
+.error-title {
+    font-size: 8em;
+}
+
+.error-subtitle {
+    font-size: 2em;
+}
+
+.back-btn {
+    padding: 10px;
+    font-size: 2em;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 3px solid var(--secondary-color);
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.back-btn:hover {
+    background-color: var(--dark-main-color);
+    color: var(--secondary-color);
+}
+
+.sky {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.clouds {
+    position: relative;
+    color: rgba(255,255,255,0.2);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.cloud {
+    position: absolute;
+    background-image: url("../../Assets/Images/paper-plane.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 176px;
+    height: 114px;
+}
+
+#cloud1 {
+    transform: rotateY(180deg);
+    top: 40px;
+    left: 400px;
+    animation: movingclouds 8s linear infinite;
+}
+
+#cloud2 {
+    transform: rotateY(180deg);
+    top: 60px;
+    left: 600px;
+    animation: movingclouds 10s linear infinite;
+}
+
+#cloud3 {
+    top: 100px;
+    left: 100px;
+    transform: scale(0.9) rotateY(180deg);
+    opacity: 0.9;
+    animation: movingclouds 12s linear infinite;
+}
+
+#cloud4 {
+    top: 200px;
+    left: 40px;
+    transform: scale(0.8) rotateY(180deg);
+    opacity: 0.8;
+    animation: movingclouds 14s linear infinite;
+}
+
+#cloud5 {
+    top: 110px;
+    left: 500px;
+    transform: scale(0.7) rotateY(180deg);
+    opacity: 0.7;
+    animation: movingclouds 16s linear infinite;
+}
+
+#cloud6 {
+    top: 210px;
+    left: 200px;
+    transform: scale(0.5)  rotateY(180deg);
+    opacity: 0.5;
+    animation: movingclouds 18s linear infinite;
+}
+
+#cloud7 {
+    top: 140px;
+    left: 700px;
+    transform: scale(0.4)  rotateY(180deg);
+    opacity: 0.4;
+    animation: movingclouds 20s linear infinite;
+}
+
+@keyframes movingclouds {
+    0% {margin-left: 100%;}
+    100% {margin-left: -150%;}
+}
