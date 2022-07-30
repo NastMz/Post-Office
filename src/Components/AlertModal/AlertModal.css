@@ -35,7 +35,7 @@
 }
 
 .alert-btn {
-    background-color: var(--main-color);
+    background: var(--main-color);
     padding: 10px;
     color: var(--secondary-color);
     cursor: pointer;

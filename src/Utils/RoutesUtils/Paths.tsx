@@ -8,7 +8,7 @@ export const Paths = [
     {
         index: 0,
         name: 'Recibidos',
-        icon: <i className='fa fa-envelope'></i>,
+        icon: <i className='fa fa-inbox'></i>,
         pathname: '/',
         element: <MainPage element={<Inbox/>}/>
     },

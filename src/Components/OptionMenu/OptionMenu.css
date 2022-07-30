@@ -1,6 +1,7 @@
 .options {
     display: flex;
     justify-content: flex-start;
+    gap: 10px;
     align-items: center;
     width: 100%;
     margin-right: 30px;
@@ -10,13 +11,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 3px;
+    padding: 4px;
     cursor: pointer;
     width: fit-content;
 }
 
 .option-menu:hover {
-    background-color: var(--dark-gray-color);
+    background-color: var(--light-main-color);
+    border-radius: 4px;
+    color: var(--secondary-color);
 }
 
 .option-menu i {
@@ -24,7 +27,9 @@
 }
 
 .open {
-    background-color: var(--dark-gray-color);
+    background-color: var(--light-main-color);
+    color: var(--secondary-color);
+    border-radius: 4px;
 }
 
 .option-btns {
@@ -33,23 +38,22 @@
 }
 
 .option-btn {
-    background-color: var(--gray-color);
+    background: var(--secondary-color);
     padding: 8px;
     margin: 0 3px 0 0;
     cursor: pointer;
-    color: var(--dark-gray-color);
+    color: var(--light-main-color);
     border-radius: 2px;
 }
 
 .option-btn:hover {
-    background-color: var(--secondary-color);
-    color: var(--main-color);
+    background: var(--light-main-color);
+    color: var(--secondary-color);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .dropdown-header {
     font-size: 20px;
-    margin-right: 15px;
 }
 
 @media (max-width: 700px) {

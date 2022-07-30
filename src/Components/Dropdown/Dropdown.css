@@ -5,6 +5,7 @@
     padding: 10px;
     border-radius: 3px;
     z-index: 1;
+    color: var(--gray-color);
 }
 
 .dropdown-list ul {
@@ -18,4 +19,5 @@
 
 .dropdown-list li:hover {
     background-color: var(--light-green);
+    border-radius: 4px;
 }

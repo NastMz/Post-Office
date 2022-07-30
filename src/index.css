@@ -20,22 +20,22 @@ html {
 }
 
 body {
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     color: var(--font-color);
     font-family: 'Gesta', 'Roboto', sans-serif;
-    font-size: 1vw;
+    font-size: 1em;
     user-select: none;
 }
 
 @media (max-width:  1300px) and (min-width: 900px) {
     body {
-        font-size: 1.5vw;
+        font-size: 1.15em;
     }
 }
 
 @media (max-width:  900px) {
     body {
-        font-size: 2vw;
+        font-size: 0.6em;
     }
 }
 
@@ -43,7 +43,7 @@ body {
 /* Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #24a681 #ffffff;
+    scrollbar-color: var(--light-main-color) #ffffff;
 }
 
 /* Chrome, Edge, and Safari */
@@ -56,7 +56,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #24a681;
+    background: var(--light-main-color);
     border-radius: 12px;
     border: 0px none #ffffff;
 }

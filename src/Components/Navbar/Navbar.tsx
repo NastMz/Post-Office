@@ -78,8 +78,8 @@ export const Navbar: React.FC = () => {
                 <span>MASSMAIL</span>
             </div>
             <div className="new-email-btn" onClick={handleClickRedact}>
-                <span>Redactar</span>
-                <i className={"fa fa-plus-circle"}></i>
+                <i className={"fa fa-feather-pointed"}></i>
+                <p className={"text"}>Redactar</p>
             </div>
             <ul>
                 {

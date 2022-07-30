@@ -3,25 +3,20 @@
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
+    background: var(--secondary-color);
+    border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     margin-bottom: 30px;
 }
 
 .mail-card:hover {
-    background-color: var(--main-color);
-    color: var(--secondary-color);
+    background: var(--light-green);
 }
-
-.mail-card:hover .date, .mail-card:hover .subject, .mail-card:hover .user-from .fa, .mail-card:hover .see {
-    color: var(--secondary-color);
-}
-
 .email-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--light-main-color);
 }
 
 .user-from {
@@ -101,7 +96,7 @@
 }
 
 .active {
-    background-color: var(--main-color);
+    background: var(--main-color);
     color: var(--secondary-color);
 }
 

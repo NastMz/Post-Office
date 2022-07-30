@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     height: 40px;
-    background-color: var(--main-color);
+    background: var(--main-color);
     color: var(--secondary-color);
     font-size: 1.3em;
     padding: 10px 20px;
@@ -99,7 +99,7 @@
 }
 
 .send-btn {
-    background-color: var(--main-color);
+    background: var(--main-color);
     color: var(--secondary-color);
     width: fit-content;
     height: fit-content;
