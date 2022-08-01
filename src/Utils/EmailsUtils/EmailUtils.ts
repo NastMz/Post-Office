@@ -1,7 +1,7 @@
 import {store} from "../../Redux/store";
 import IEmail from "../../Models/Interfaces/IEmail";
 import Email from "../../Models/implements/Email";
-import {reducerNames} from "../ReducersUtils/reducerNames";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 
 export function isActive(emailsReducer: string) {
     let emailActive = false;

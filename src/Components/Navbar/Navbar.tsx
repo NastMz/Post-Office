@@ -11,10 +11,10 @@ import {
     openPage,
     resetSearch,
     unmarkAsSelected
-} from "../../Utils/ReducersUtils/reducersList";
+} from "../../Redux/ReducersUtils/reducersList";
 import Path from "../../Models/Interfaces/IPath";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 
 export const Navbar: React.FC = () => {
 

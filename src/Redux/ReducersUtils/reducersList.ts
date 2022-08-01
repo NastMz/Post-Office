@@ -85,6 +85,7 @@ const add = (email: IEmail, on: string) => {
         payload: email
     }
 };
+
 const remove = (index: number, reducer: string) => {
     return {
         type: `@email${reducer}/remove`,
@@ -207,6 +208,13 @@ const deleteDone = () => {
     }
 }
 
+const addUser = (user: {name: string, email: string}) => {
+    return {
+        type: `@users/add`,
+        payload: user
+    }
+};
+
 export {
     openPage,
     closeDropdown,
@@ -239,5 +247,6 @@ export {
     setAlertMessage,
     resetAlertMessage,
     alertDelete,
-    deleteDone
+    deleteDone,
+    addUser
 }

@@ -6,7 +6,7 @@ import {store} from "../../Redux/store";
 import {getActive, isActive} from "../../Utils/EmailsUtils/EmailUtils";
 import IEmail from "../../Models/Interfaces/IEmail";
 import {search} from "../../Utils/EmailsUtils/search";
-import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 
 export const ArchiveMails: React.FC = () => {
 

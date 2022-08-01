@@ -10,8 +10,9 @@ import {
     setAlertMessage,
     setMailbox,
     showAlert
-} from "../../Utils/ReducersUtils/reducersList";
-import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
+} from "../../Redux/ReducersUtils/reducersList";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
+import {sendEmail} from "../../API/EmailAPI";
 
 interface Props {
     name: string,
@@ -23,6 +24,7 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isMinimized, setMinimized] = useState<boolean>(false);
     const [toEmail, setToEmail] = useState<string>('');
+    const [toName, setToName] = useState<string>('');
     const [subjectEmail, setSubjectEmail] = useState<string>('');
     const [messageEmail, setMessageEmail] = useState<string>('');
 
@@ -31,7 +33,7 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
             to: toEmail,
             subject: subjectEmail,
             message: messageEmail,
-            name: name,
+            name: toName,
             from: email
         }));
     }, [toEmail, subjectEmail, messageEmail]);
@@ -67,8 +69,10 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
 
     const handleClickSend = () => {
         checkForm();
-        if (store.getState().alertReducer.message === '') {
+        if (store.getState().alertReducer.message.toString().length === 0) {
             store.dispatch(add(store.getState().sendMailBoxReducer['email'], reducerNames[1]));
+            let _email = store.getState().sendMailBoxReducer['email'];
+            sendEmail(_email.to, _email.subject, _email.message)
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
         } else {

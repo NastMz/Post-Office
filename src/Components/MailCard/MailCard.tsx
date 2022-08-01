@@ -15,8 +15,8 @@ import {
     unmarkAsArchive,
     unmarkAsImportant,
     unmarkAsSelected
-} from "../../Utils/ReducersUtils/reducersList";
-import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
+} from "../../Redux/ReducersUtils/reducersList";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 
 interface Props {
     props: IEmail;

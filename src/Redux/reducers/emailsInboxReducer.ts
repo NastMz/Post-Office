@@ -1,9 +1,8 @@
-import {getInboxEmails} from "../../API/EmailAPI";
 import IEmail from "../../Models/Interfaces/IEmail";
 
 const reducerName = `@emailInbox`;
 
-export const emailsInboxReducer = (state: Array<IEmail> = getInboxEmails(), action: any) => {
+export const emailsInboxReducer = (state: Array<IEmail> = [], action: any) => {
     switch (action.type) {
         case `${reducerName}/create`:
             return [...state, action.payload]

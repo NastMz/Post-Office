@@ -10,7 +10,7 @@ const Logo = (props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) =>
         <path
             style={{
                 opacity: 1,
-                fill: "#24a681",
+                fill: "#0090FF",
                 fillOpacity: 1,
                 stroke: "none",
                 strokeWidth: 0.884775,

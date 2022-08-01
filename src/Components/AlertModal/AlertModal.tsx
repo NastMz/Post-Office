@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import './AlertModal.css';
 import {store} from "../../Redux/store";
-import {alertDelete, closeAlert, resetAlertMessage} from "../../Utils/ReducersUtils/reducersList";
+import {alertDelete, closeAlert, resetAlertMessage} from "../../Redux/ReducersUtils/reducersList";
 
 export const AlertModal: React.FC = () => {
 

@@ -19,9 +19,9 @@ import {
     unmarkAsActive,
     unmarkAsArchive,
     unmarkAsImportant
-} from "../../Utils/ReducersUtils/reducersList";
+} from "../../Redux/ReducersUtils/reducersList";
 import IEmail from "../../Models/Interfaces/IEmail";
-import {reducerNames} from "../../Utils/ReducersUtils/reducerNames";
+import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 
 export const OptionMenu: React.FC = () => {
 

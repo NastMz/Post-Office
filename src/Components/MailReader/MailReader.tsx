@@ -3,7 +3,7 @@ import './MailReader.css';
 import IEmail from "../../Models/Interfaces/IEmail";
 import {getActive} from "../../Utils/EmailsUtils/EmailUtils";
 import {store} from "../../Redux/store";
-import {unmarkAsActive} from "../../Utils/ReducersUtils/reducersList";
+import {unmarkAsActive} from "../../Redux/ReducersUtils/reducersList";
 
 interface Props {
     props: IEmail,
