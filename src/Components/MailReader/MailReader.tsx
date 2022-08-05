@@ -34,10 +34,10 @@ export const MailReader: React.FC<Props> = ({props, reducer}) => {
                     </div>
                     <div className={"user-info"}>
                         <div className={"from-email"}>
-                            <span className="email-from-name">{props.name.toUpperCase()}</span>
+                            <span className="email-from-name">{props.from_name}</span>
                             <span className="email-from">{`< ${props.from} >`}</span>
                         </div>
-                        <span className={"email-to"}>{`To: ${props.to}`}</span>
+                        <span className={"email-to"}>{`Para: ${props.to}`}</span>
                     </div>
                 </div>
                 <div className={"email-date"}>

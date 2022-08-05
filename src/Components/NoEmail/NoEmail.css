@@ -1,0 +1,15 @@
+.no-email {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-color);
+}
+
+.no-email i {
+    font-size: 5em;
+    color: var(--light-main-color);
+}

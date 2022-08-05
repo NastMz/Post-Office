@@ -8,6 +8,9 @@ import {searchBarReducer} from "./reducers/searchBarReducer";
 import {checkedReducer} from "./reducers/checkedReducer";
 import {sendMailBoxReducer} from "./reducers/sendMailBoxReducer";
 import {alertReducer} from "./reducers/alertReducer";
+import {usersReducer} from "./reducers/usersReducer";
+import {profileReducer} from "./reducers/profileReducer";
+import {loadReducer} from "./reducers/loadReducer";
 
 export default combineReducers({
     emailsArchivedReducer,
@@ -18,5 +21,8 @@ export default combineReducers({
     searchBarReducer,
     dropdownReducer,
     sendMailBoxReducer,
-    alertReducer
+    alertReducer,
+    usersReducer,
+    profileReducer,
+    loadReducer
 });

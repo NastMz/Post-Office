@@ -5,7 +5,8 @@ import {
     add,
     closeMailBox,
     maximizeMailBox,
-    minimizeMailBox, resetAlertMessage,
+    minimizeMailBox,
+    resetAlertMessage,
     resetMailBox,
     setAlertMessage,
     setMailbox,
@@ -14,17 +15,11 @@ import {
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {sendEmail} from "../../API/EmailAPI";
 
-interface Props {
-    name: string,
-    email: string,
-}
-
-export const SendMailBox: React.FC<Props> = ({name, email}) => {
+export const SendMailBox: React.FC = () => {
 
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isMinimized, setMinimized] = useState<boolean>(false);
     const [toEmail, setToEmail] = useState<string>('');
-    const [toName, setToName] = useState<string>('');
     const [subjectEmail, setSubjectEmail] = useState<string>('');
     const [messageEmail, setMessageEmail] = useState<string>('');
 
@@ -32,9 +27,7 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
         store.dispatch(setMailbox({
             to: toEmail,
             subject: subjectEmail,
-            message: messageEmail,
-            name: toName,
-            from: email
+            message: messageEmail
         }));
     }, [toEmail, subjectEmail, messageEmail]);
 
@@ -70,11 +63,12 @@ export const SendMailBox: React.FC<Props> = ({name, email}) => {
     const handleClickSend = () => {
         checkForm();
         if (store.getState().alertReducer.message.toString().length === 0) {
-            store.dispatch(add(store.getState().sendMailBoxReducer['email'], reducerNames[1]));
-            let _email = store.getState().sendMailBoxReducer['email'];
-            sendEmail(_email.to, _email.subject, _email.message)
+            let email = store.getState().sendMailBoxReducer['email'];
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
+            sendEmail(email.to, email.subject, email.message).then(() => {
+                store.dispatch(add(store.getState().sendMailBoxReducer['email'], reducerNames[1]))
+            });
         } else {
             store.dispatch(showAlert());
         }

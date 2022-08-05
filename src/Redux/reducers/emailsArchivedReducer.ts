@@ -102,6 +102,8 @@ export const emailsArchivedReducer = (state: Array<IEmail> = [], action: any) =>
                     selected: false
                 }
             });
+        case `${reducerName}/reset`:
+            return [];
         default:
             return state;
     }

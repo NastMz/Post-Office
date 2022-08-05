@@ -7,6 +7,8 @@ export const usersReducer = (state: Array<{name: string, email: string}> = [], a
                 ...state,
                 action.payload
             ];
+        case `${reducerName}/remove`:
+            return state.filter(user => user.email !== action.payload);
         default:
             return state;
     }

@@ -1,0 +1,160 @@
+.form-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.mark {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 20px;
+}
+
+.welcome-message {
+    width: 40%;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    padding: 80px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+}
+
+.welcome-message p {
+    font-size: 1.2em;
+}
+
+.form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.form-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    font-weight: 550;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-inputs input {
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+    padding: 10px 20px 10px 40px;
+    width: 80%;
+}
+
+.input {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.input i {
+    position: absolute;
+    top: 27%;
+    left: 14%;
+    color: var(--main-color);
+}
+
+.form-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-btn {
+    background: var(--main-color);
+    padding: 10px 40px;
+    color: var(--secondary-color);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: var(--dark-main-color);
+}
+
+.redirect {
+    font-size: 0.9em;
+    text-decoration: none;
+    color: var(--dark-main-color);
+}
+
+.sub {
+    color: var(--main-color);
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .welcome-message {
+        padding: 30px 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .form {
+        margin: 70px 0 40px 0;
+        width: 100%;
+    }
+
+    .input i {
+        top: 30%;
+        left: 15%;
+    }
+
+    .input {
+        width: 90%;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+}
+
+.loader-background {
+    z-index: 1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+}

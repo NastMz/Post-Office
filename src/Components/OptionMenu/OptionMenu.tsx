@@ -3,25 +3,31 @@ import './OptionMenu.css';
 import {Dropdown} from "../Dropdown/Dropdown";
 import {store} from "../../Redux/store";
 import {
-    add,
     checkAll,
     closeDropdown,
     deleteDone,
     isCheck,
     isUncheck,
-    markAsArchive,
-    markAsImportant,
     openDropdown,
-    remove,
+    resetArchive,
+    resetInbox,
+    resetSend,
     setAlertMessage,
+    setLoading,
     showAlert,
     uncheckAll,
     unmarkAsActive,
-    unmarkAsArchive,
-    unmarkAsImportant
+    unsetLoading
 } from "../../Redux/ReducersUtils/reducersList";
 import IEmail from "../../Models/Interfaces/IEmail";
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
+import {
+    deleteEmail,
+    setEmailAsArchived,
+    setEmailAsImportant,
+    unsetEmailAsArchived,
+    unsetEmailAsImportant
+} from "../../API/EmailAPI";
 
 export const OptionMenu: React.FC = () => {
 
@@ -74,10 +80,21 @@ export const OptionMenu: React.FC = () => {
             case 0:
                 store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                     if (email.selected) {
+                        store.dispatch(setLoading());
                         if (email.important) {
-                            store.dispatch(unmarkAsImportant(email.index, reducerNames[0]));
+                            unsetEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         } else {
-                            store.dispatch(markAsImportant(email.index, reducerNames[0]));
+                            setEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     }
                 });
@@ -86,10 +103,21 @@ export const OptionMenu: React.FC = () => {
             case 1:
                 store.getState().emailsSentReducer.forEach((email: IEmail) => {
                     if (email.selected) {
+                        store.dispatch(setLoading());
                         if (email.important) {
-                            store.dispatch(unmarkAsImportant(email.index, reducerNames[1]));
+                            unsetEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         } else {
-                            store.dispatch(markAsImportant(email.index, reducerNames[1]));
+                            setEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     }
                 });
@@ -98,10 +126,21 @@ export const OptionMenu: React.FC = () => {
             case 2:
                 store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                     if (email.selected) {
+                        store.dispatch(setLoading());
                         if (email.important) {
-                            store.dispatch(unmarkAsImportant(email.index, reducerNames[2]));
+                            unsetEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         } else {
-                            store.dispatch(markAsImportant(email.index, reducerNames[2]));
+                            setEmailAsImportant(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     }
                 });
@@ -116,16 +155,16 @@ export const OptionMenu: React.FC = () => {
             case 0:
                 store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                     if (email.selected) {
-                        store.dispatch(markAsArchive(email.index, reducerNames[0]));
-                        if (email.active) {
-                            store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
-                        }
-                    }
-                });
-                store.getState().emailsInboxReducer.forEach(email => {
-                    if (email.selected) {
-                        store.dispatch(add(email, 'Archived'));
-                        store.dispatch(remove(email.index, reducerNames[0]));
+                        store.dispatch(setLoading());
+                        setEmailAsArchived(email.index.toString()).then(() => {
+                            if (email.active) {
+                                store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
+                            }
+                            store.dispatch(resetSend());
+                            store.dispatch(resetInbox());
+                            store.dispatch(resetArchive());
+                            store.dispatch(unsetLoading());
+                        });
                     }
                 });
                 store.dispatch(uncheckAll(reducerNames[0]));
@@ -134,16 +173,16 @@ export const OptionMenu: React.FC = () => {
             case 1:
                 store.getState().emailsSentReducer.forEach((email: IEmail) => {
                     if (email.selected) {
-                        store.dispatch(markAsArchive(email.index, reducerNames[1]));
-                        if (email.active) {
-                            store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
-                        }
-                    }
-                });
-                store.getState().emailsSentReducer.forEach(email => {
-                    if (email.selected) {
-                        store.dispatch(add(email, 'Archived'));
-                        store.dispatch(remove(email.index, reducerNames[1]));
+                        store.dispatch(setLoading());
+                        setEmailAsArchived(email.index.toString()).then(() => {
+                            if (email.active) {
+                                store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
+                            }
+                            store.dispatch(resetSend());
+                            store.dispatch(resetInbox());
+                            store.dispatch(resetArchive());
+                            store.dispatch(unsetLoading());
+                        });
                     }
                 });
                 store.dispatch(uncheckAll(reducerNames[1]));
@@ -152,16 +191,16 @@ export const OptionMenu: React.FC = () => {
             case 2:
                 store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                     if (email.selected) {
-                        store.dispatch(unmarkAsArchive(email.index));
-                        if (email.active) {
-                            store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
-                        }
-                    }
-                });
-                store.getState().emailsArchivedReducer.forEach(email => {
-                    if (email.selected) {
-                        store.dispatch(add(email, (email.context === 'send' ? reducerNames[1] : reducerNames[0])));
-                        store.dispatch(remove(email.index, reducerNames[2]));
+                        store.dispatch(setLoading());
+                        unsetEmailAsArchived(email.index.toString()).then(() => {
+                            if (email.active) {
+                                store.dispatch(unmarkAsActive(email.index, reducerNames[2]));
+                            }
+                            store.dispatch(resetSend());
+                            store.dispatch(resetInbox());
+                            store.dispatch(resetArchive());
+                            store.dispatch(unsetLoading());
+                        });
                     }
                 });
                 store.dispatch(uncheckAll(reducerNames[2]));
@@ -187,23 +226,41 @@ export const OptionMenu: React.FC = () => {
         if (isDeleting) {
             switch (store.getState().navbarReducer.index) {
                 case 0:
+                    store.dispatch(setLoading());
                     store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                         if (email.selected) {
-                            store.dispatch(remove(email.index, reducerNames[0]));
+                            deleteEmail(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     });
                     break;
                 case 1:
+                    store.dispatch(setLoading());
                     store.getState().emailsSentReducer.forEach((email: IEmail) => {
                         if (email.selected) {
-                            store.dispatch(remove(email.index, reducerNames[1]));
+                            deleteEmail(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     });
                     break;
                 case 2:
+                    store.dispatch(setLoading());
                     store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                         if (email.selected) {
-                            store.dispatch(remove(email.index, reducerNames[2]));
+                            deleteEmail(email.index.toString()).then(() => {
+                                store.dispatch(resetSend());
+                                store.dispatch(resetInbox());
+                                store.dispatch(resetArchive());
+                                store.dispatch(unsetLoading());
+                            });
                         }
                     });
                     break;

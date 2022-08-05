@@ -9,7 +9,8 @@ export default class Email implements IEmail {
     important: boolean;
     index: number;
     message: string;
-    name: string;
+    from_name: string;
+    to_name: string;
     read: boolean;
     selected: boolean;
     subject: string;
@@ -25,7 +26,8 @@ export default class Email implements IEmail {
         this.active = false;
         this.date = '';
         this.important = false;
-        this.name = '';
+        this.to_name = '';
+        this.from_name = '';
         this.read = false;
         this.archive = false;
         this.context = '';

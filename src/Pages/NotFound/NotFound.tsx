@@ -20,7 +20,7 @@ export const NotFound: React.FC = () => {
             </div>
             <div className={'container'}>
                 <div className={'error'}>
-                    <i className={"fa fa-laptop"}></i>
+                    <i className={"fa fa-cloud"}></i>
                     <span className={'error-number'}>404</span>
                     <span className={'error-title'}>ERROR</span>
                     <span className={'error-subtitle'}>Pagina No Encontrada</span>

@@ -27,17 +27,6 @@ body {
     user-select: none;
 }
 
-@media (max-width:  1300px) and (min-width: 900px) {
-    body {
-        font-size: 1.15em;
-    }
-}
-
-@media (max-width:  900px) {
-    body {
-        font-size: 0.6em;
-    }
-}
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */

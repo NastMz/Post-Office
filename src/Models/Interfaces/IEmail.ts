@@ -3,7 +3,8 @@ export default interface IEmail {
     context: string;
     subject: string;
     message: string;
-    name: string;
+    from_name: string;
+    to_name: string;
     from: string;
     to: string;
     date: string;

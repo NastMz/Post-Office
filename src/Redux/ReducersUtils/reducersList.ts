@@ -1,7 +1,5 @@
 import IEmail from "../../Models/Interfaces/IEmail";
 import Path from "../../Models/Interfaces/IPath";
-import { IMailBoxProps } from "../../Models/Interfaces/IMailBoxProps";
-import { type } from "@testing-library/user-event/dist/type";
 
 const openPage = (payload: Path) => {
     return {
@@ -129,9 +127,9 @@ const uncheckAll = (reducer: string) => {
 };
 
 const openMailBox = () => {
-  return {
-      type: `@sendmailbox/open`
-  }
+    return {
+        type: `@sendmailbox/open`
+    }
 }
 
 const closeMailBox = () => {
@@ -153,22 +151,22 @@ const maximizeMailBox = () => {
 }
 
 const setMailbox = (props: any) => {
-  return {
-      type: `@sendmailbox/set`,
-      payload: {
-          name: props.name,
-          to: props.to,
-          from: props.from,
-          subject: props.subject,
-          message: props.message
-      }
-  }
+    return {
+        type: `@sendmailbox/set`,
+        payload: {
+            name: props.name,
+            to: props.to,
+            from: props.from,
+            subject: props.subject,
+            message: props.message
+        }
+    }
 }
 
 const resetMailBox = () => {
-  return{
-      type: `@sendmailbox/reset`
-  }
+    return {
+        type: `@sendmailbox/reset`
+    }
 }
 
 const showAlert = () => {
@@ -184,10 +182,10 @@ const closeAlert = () => {
 }
 
 const setAlertMessage = (message: Array<string>) => {
-  return {
-      type: `@alert/message`,
-      payload: message
-  }
+    return {
+        type: `@alert/message`,
+        payload: message
+    }
 }
 
 const resetAlertMessage = () => {
@@ -208,12 +206,62 @@ const deleteDone = () => {
     }
 }
 
-const addUser = (user: {name: string, email: string}) => {
+const addUser = (user: { name: string, email: string }) => {
     return {
         type: `@users/add`,
         payload: user
     }
 };
+
+const removeUser = (email: string) => {
+    return {
+        type: `@users/remove`,
+        payload: email
+    }
+};
+
+const setProfile = (user: { name: string, email: string }) => {
+    return {
+        type: `@profile/set`,
+        payload: user
+    }
+};
+
+const getProfile = () => {
+    return {
+        type: `@profile/get`
+    }
+};
+
+const resetInbox = () => {
+    return {
+        type: `@emailInbox/reset`
+    }
+};
+
+const resetSend = () => {
+    return {
+        type: `@emailSent/reset`
+    }
+};
+
+const resetArchive = () => {
+    return {
+        type: `@emailArchived/reset`
+    }
+};
+
+const setLoading = () => {
+    return {
+        type: `@load/setLoading`
+    }
+}
+const unsetLoading = () => {
+    return {
+        type: `@load/unsetLoading`
+    }
+}
+
 
 export {
     openPage,
@@ -248,5 +296,13 @@ export {
     resetAlertMessage,
     alertDelete,
     deleteDone,
-    addUser
+    addUser,
+    removeUser,
+    setProfile,
+    getProfile,
+    resetInbox,
+    resetSend,
+    resetArchive,
+    setLoading,
+    unsetLoading
 }

@@ -6,33 +6,19 @@ import './Assets/fonts/fontawesome/fontawesome-free-6.1.1-web/css/all.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {getArchivedEmails, getEmails, getInboxEmails, getSentEmails, getUsers} from "./API/EmailAPI";
-import {addUser} from "./Redux/ReducersUtils/reducersList";
-import {store} from "./Redux/store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-let emailList = getEmails();
-let userList = getUsers();
-userList.then((results) => {
-   results['users'].forEach((result: {name: string, email: string}) => {
-     store.dispatch(addUser(result));
-   });
-});
-emailList.then((results) => {
-    getArchivedEmails(results);
-    getInboxEmails(results);
-    getSentEmails(results);
-    root.render(
-        <BrowserRouter>
 
-            <App/>
+root.render(
+    <BrowserRouter>
 
-        </BrowserRouter>
-    );
-});
+        <App/>
+
+    </BrowserRouter>
+);
 
 
 // If you want to start measuring performance in your app, pass a function
