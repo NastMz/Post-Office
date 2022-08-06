@@ -2,7 +2,7 @@ import IEmail from "../Models/Interfaces/IEmail";
 import {store} from "../Redux/store";
 import {add} from "../Redux/ReducersUtils/reducersList";
 
-const apiUrl = "http://3.86.103.183:5000/api"
+const apiUrl = "https://massmail-api.herokuapp.com/api"
 
 export function getArchivedEmails(emailList: any) {
     if (emailList.hasOwnProperty('emails')) {
