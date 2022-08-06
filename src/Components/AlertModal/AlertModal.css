@@ -18,15 +18,16 @@
 
 .alert-modal {
     background-color: var(--secondary-color);
-    height: 250px;
+    height: fit-content;
     width: 450px;
     font-size: 1.5em;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 30px 50px;
     border-radius: 2px;
+    gap: 15px;
 }
 
 .alert-title {
@@ -56,7 +57,7 @@
 }
 
 .alert-message {
-    font-size: 0.95em;
+    font-size: 0.8em;
     white-space: pre-line;
     text-align: center;
 }
@@ -75,9 +76,11 @@
 }
 
 @media (max-width: 700px) {
+    .alert-modal-container {
+        width: 95%;
+    }
     .alert-modal {
-        height: 180px;
-        width: 280px;
+        width: 100%;
     }
 }
 

@@ -66,14 +66,14 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 80%;
 }
 
 .form-inputs input {
     border: 1px solid var(--main-color);
     border-radius: 20px;
     padding: 10px 20px 10px 40px;
-    width: 80%;
+    width: 100%;
 }
 
 .input {
@@ -87,7 +87,7 @@
 .input i {
     position: absolute;
     top: 27%;
-    left: 14%;
+    left: 5%;
     color: var(--main-color);
 }
 
@@ -138,8 +138,8 @@
     }
 
     .input i {
-        top: 30%;
-        left: 15%;
+        top: 28%;
+        left: 6%;
     }
 
     .input {
