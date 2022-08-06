@@ -19,8 +19,8 @@ header {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 150px;
     cursor: pointer;
+    min-width: fit-content;
 }
 
 .user {
@@ -49,3 +49,22 @@ header {
     transform: rotate(180deg);
 }
 
+.nav-btn {
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    color: var(--main-color);
+}
+
+@media (max-width: 700px) {
+    header {
+        justify-content: center;
+        padding-left: 20px;
+        gap: 20px;
+    }
+    .page-name {
+        width: 100%;
+    }
+}

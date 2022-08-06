@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 import {Paths} from "../../Utils/RoutesUtils/Paths";
 import {store} from "../../Redux/store";
 import {LogoutMenu} from "../LogoutMenu/LogoutMenu";
-import {closeMenu, openMenu} from "../../Redux/ReducersUtils/reducersList";
+import {closeMenu, openMenu, openSidebar} from "../../Redux/ReducersUtils/reducersList";
 
 export const Header: React.FC = () => {
     const location = useLocation();
@@ -27,12 +27,19 @@ export const Header: React.FC = () => {
         }
     }
 
+    const handleClickOpen = () => {
+        store.dispatch(openSidebar());
+    }
+
     store.subscribe(() => {
         setOpen(store.getState().menuReducer);
     });
 
     return (
         <header>
+            <div className={'nav-btn show'} onClick={() => handleClickOpen()}>
+                <i className={`fa fa-bars`}></i>
+            </div>
             <div className="page-name">
                 <span>{pageName}</span>
             </div>

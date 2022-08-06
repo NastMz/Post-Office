@@ -1,40 +1,12 @@
 nav {
     height: 100%;
-    min-width: 250px;
+    width: 250px;
     overflow-y: auto;
     background-color: var(--secondary-color);
     overflow-x: hidden;
     font-size: 1.3em;
     padding: 1em;
     border-right: 1px solid var(--light-gray-color);
-}
-
-@media (max-width: 1300px) and (min-width: 900px) {
-    nav {
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 900px) and (min-width: 700px) {
-    nav {
-        min-width: 200px !important;
-        font-size: 0.8em;
-    }
-
-    .logo {
-        height: 40px;
-    }
-}
-
-@media (max-width: 700px) {
-    nav {
-        min-width: 120px !important;
-        font-size: 1.2em;
-    }
-
-    nav li span {
-        width: 20px !important;
-    }
 }
 
 .logo {
@@ -121,4 +93,46 @@ nav li i {
 .selected {
     background-color: var(--light-green);
     color: var(--main-color);
+}
+
+.close-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.close-nav i:hover {
+    color: var(--red-color);
+}
+
+.show {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    nav {
+        position: absolute;
+        border: none;
+        left: -300px;
+        transition: 0.3s;
+    }
+    .nav-background {
+        position: absolute;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    .show {
+        display: flex;
+    }
+    .open-nav {
+        display: block;
+    }
+    .show-nav {
+        left: 0;
+    }
 }

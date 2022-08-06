@@ -30,6 +30,17 @@ const closeMenu = () => {
     }
 };
 
+const openSidebar = () => {
+    return {
+        type: '@bar/open'
+    }
+};
+const closeSidebar = () => {
+    return {
+        type: '@bar/close'
+    }
+};
+
 const searchIn = (search: string) => {
     return {
         type: '@searchBar/search',
@@ -317,5 +328,7 @@ export {
     setLoading,
     unsetLoading,
     openMenu,
-    closeMenu
+    closeMenu,
+    openSidebar,
+    closeSidebar
 }

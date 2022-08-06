@@ -6,6 +6,7 @@ import Logo from "../Logo/Logo";
 import {store} from "../../Redux/store";
 import {
     closeDropdown,
+    closeSidebar,
     isUncheck,
     openMailBox,
     openPage,
@@ -22,6 +23,8 @@ export const Navbar: React.FC = () => {
 
     const [unread, setUnread] = useState<number>(store.getState().emailsInboxReducer.filter(email => !email.read).length);
     const [activeIndex, setActiveIndex] = useState<Path>(store.getState().navbarReducer);
+    const [isOpen, setOpen] = useState<boolean>(store.getState().sidebarReducer);
+    const [openNav, setOpenNav] = useState<boolean>(false);
 
     const handleClickOption = (path: Path) => () => {
         if (store.getState().dropdownReducer) {
@@ -53,10 +56,14 @@ export const Navbar: React.FC = () => {
                 });
                 break;
         }
+        handleClickClose();
         store.dispatch(openPage(path));
     };
 
     const handleClickRedact = () => {
+        if (isOpen) {
+            store.dispatch(closeSidebar());
+        }
         store.dispatch(openMailBox());
     };
 
@@ -64,41 +71,60 @@ export const Navbar: React.FC = () => {
         if (location.pathname !== activeIndex.pathname) {
             store.dispatch(openPage(Paths.filter(path => path.pathname === location.pathname)[0]));
         }
-    }, [activeIndex]);
+    }, [activeIndex, location.pathname]);
+
+    const handleClickClose = () => {
+        setOpenNav(false);
+        setTimeout(()=> {
+            store.dispatch(closeSidebar());
+        }, 300);
+    };
+
+    useEffect(() => {
+        setTimeout(()=>{
+            setOpenNav(isOpen);
+        }, 50)
+    }, [isOpen]);
 
     store.subscribe(() => {
         setUnread(store.getState().emailsInboxReducer.filter(email => !email.read).length);
         setActiveIndex(store.getState().navbarReducer);
+        setOpen(store.getState().sidebarReducer);
     })
 
     return (
-        <nav>
-            <div className="logo">
-                <Logo/>
-                <span>MASSMAIL</span>
-            </div>
-            <div className="new-email-btn" onClick={handleClickRedact}>
-                <i className={"fa fa-feather-pointed"}></i>
-                <p className={"text"}>Redactar</p>
-            </div>
-            <ul>
-                {
-                    Paths.map((route) =>
-                        <li key={route.index} className={activeIndex.index === route.index ? 'selected' : ""}>
-                            <Link to={route.pathname}
-                                  onClick={handleClickOption({index: route.index, pathname: route.pathname})}>
-                                <div>
-                                    {route.icon}
-                                    {route.name}
-                                </div>
-                                <div>
-                                    {route.index === 0 ? (unread > 0 ? <span>{unread}</span> : "") : ""}
-                                </div>
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-        </nav>
+        <div className={`nav-background ${isOpen ? 'open-nav' : ''}`}>
+            <nav className={`${openNav ? 'show-nav' : ''}`}>
+                <div className={"close-nav show"}>
+                    <i className={"fa fa-close"} onClick={() => handleClickClose()}></i>
+                </div>
+                <div className="logo">
+                    <Logo/>
+                    <span>MASSMAIL</span>
+                </div>
+                <div className="new-email-btn" onClick={handleClickRedact}>
+                    <i className={"fa fa-feather-pointed"}></i>
+                    <p className={"text"}>Redactar</p>
+                </div>
+                <ul>
+                    {
+                        Paths.map((route) =>
+                            <li key={route.index} className={activeIndex.index === route.index ? 'selected' : ""}>
+                                <Link to={route.pathname}
+                                      onClick={handleClickOption({index: route.index, pathname: route.pathname})}>
+                                    <div>
+                                        {route.icon}
+                                        {route.name}
+                                    </div>
+                                    <div>
+                                        {route.index === 0 ? (unread > 0 ? <span>{unread}</span> : "") : ""}
+                                    </div>
+                                </Link>
+                            </li>
+                        )
+                    }
+                </ul>
+            </nav>
+        </div>
     )
 };
