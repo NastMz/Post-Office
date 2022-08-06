@@ -19,6 +19,17 @@ const closeDropdown = () => {
     }
 };
 
+const openMenu = () => {
+    return {
+        type: '@menu/open'
+    }
+};
+const closeMenu = () => {
+    return {
+        type: '@menu/close'
+    }
+};
+
 const searchIn = (search: string) => {
     return {
         type: '@searchBar/search',
@@ -304,5 +315,7 @@ export {
     resetSend,
     resetArchive,
     setLoading,
-    unsetLoading
+    unsetLoading,
+    openMenu,
+    closeMenu
 }
