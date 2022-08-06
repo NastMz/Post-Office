@@ -12,7 +12,7 @@ import {
     resetInbox,
     resetSend,
     setAlertMessage,
-    setLoading,
+    loading,
     showAlert,
     unmarkAsActive,
     unmarkAsSelected,
@@ -20,7 +20,7 @@ import {
 } from "../../Redux/ReducersUtils/reducersList";
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {
-    deleteEmail,
+    deleteEmail, loadEmails,
     setEmailAsArchived,
     setEmailAsImportant,
     setEmailAsRead,
@@ -53,65 +53,47 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
         const handleClickImportant = (index: number) => () => {
             switch (reducer) {
                 case reducerNames[2]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsArchivedReducer.forEach(email => {
                         if (email.index === index) {
                             if (email.important) {
                                 unsetEmailAsImportant(index.toString()).then(() => {
-                                    store.dispatch(resetSend());
-                                    store.dispatch(resetInbox());
-                                    store.dispatch(resetArchive());
-                                    store.dispatch(unsetLoading());
+                                    loadEmails();
                                 })
                             } else {
                                 setEmailAsImportant(index.toString()).then(() => {
-                                    store.dispatch(resetSend());
-                                    store.dispatch(resetInbox());
-                                    store.dispatch(resetArchive());
-                                    store.dispatch(unsetLoading());
+                                    loadEmails();
                                 })
                             }
                         }
                     });
                     break;
                 case reducerNames[1]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsSentReducer.forEach(email => {
                         if (email.index === index) {
                             if (email.important) {
                                 unsetEmailAsImportant(index.toString()).then(() => {
-                                    store.dispatch(resetSend());
-                                    store.dispatch(resetInbox());
-                                    store.dispatch(resetArchive());
-                                    store.dispatch(unsetLoading());
+                                    loadEmails();
                                 })
                             } else {
                                 setEmailAsImportant(index.toString()).then(() => {
-                                    store.dispatch(resetSend());
-                                    store.dispatch(resetInbox());
-                                    store.dispatch(resetArchive());
-                                    store.dispatch(unsetLoading());
+                                    loadEmails();
                                 });
                             }
                         }
                     });
                     break;
                 case reducerNames[0]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsInboxReducer.forEach(email => {
                         if (email.important) {
                             unsetEmailAsImportant(index.toString()).then(() => {
-                                store.dispatch(resetSend());
-                                store.dispatch(resetInbox());
-                                store.dispatch(resetArchive());
-                                store.dispatch(unsetLoading());
+                                loadEmails();
                             });
                         } else {
                             setEmailAsImportant(index.toString()).then(() => {
-                                store.dispatch(resetSend());
-                                store.dispatch(resetInbox());
-                                store.dispatch(resetArchive());
-                                store.dispatch(unsetLoading());
+                                loadEmails();
                             });
                         }
                     });
@@ -122,41 +104,32 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
         const handleClickArchive = (index: number) => () => {
             switch (reducer) {
                 case reducerNames[2]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsArchivedReducer.forEach(email => {
                             if (email.index === index) {
                                 unsetEmailAsArchived(index.toString()).then(() => {
-                                    store.dispatch(resetSend());
-                                    store.dispatch(resetInbox());
-                                    store.dispatch(resetArchive());
-                                    store.dispatch(unsetLoading());
+                                    loadEmails();
                                 });
                             }
                         }
                     );
                     break;
                 case reducerNames[1]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsSentReducer.forEach(email => {
                         if (email.index === index) {
                             setEmailAsArchived(index.toString()).then(() => {
-                                store.dispatch(resetSend());
-                                store.dispatch(resetInbox());
-                                store.dispatch(resetArchive());
-                                store.dispatch(unsetLoading());
+                                loadEmails();
                             });
                         }
                     });
                     break;
                 case reducerNames[0]:
-                    store.dispatch(setLoading());
+                    store.dispatch(loading());
                     store.getState().emailsInboxReducer.forEach(email => {
                         if (email.index === index) {
                             setEmailAsArchived(index.toString()).then(() => {
-                                store.dispatch(resetSend());
-                                store.dispatch(resetInbox());
-                                store.dispatch(resetArchive());
-                                store.dispatch(unsetLoading());
+                                loadEmails();
                             });
                         }
                     });
@@ -198,14 +171,11 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
 
         useEffect(() => {
             if (isDeleting) {
-                store.dispatch(setLoading());
+                store.dispatch(loading());
                 deleteEmail(deleteIndex.toString()).then(() => {
-                    store.dispatch(resetSend());
-                    store.dispatch(resetInbox());
-                    store.dispatch(resetArchive());
                     store.dispatch(deleteDone());
                     setDeleteIndex(-1);
-                    store.dispatch(unsetLoading());
+                    loadEmails();
                 });
             }
         }, [isDeleting]);

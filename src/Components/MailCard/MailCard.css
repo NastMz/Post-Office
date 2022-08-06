@@ -105,9 +105,3 @@
     color: var(--secondary-color);
 }
 
-@media (max-width: 700px) {
-    .mail-card {
-        padding: 10px 15px;
-    }
-}
-

@@ -5,6 +5,7 @@ import {NotFound} from "./Pages/NotFound/NotFound";
 import {Paths} from "./Utils/RoutesUtils/Paths";
 import {Login} from "./Pages/Login/Login";
 import {Register} from "./Pages/Register/Register";
+import {loadEmails} from "./API/EmailAPI";
 
 
 export default function App() {
@@ -46,7 +47,8 @@ function AuthRequired(props: any) {
         return <>
             <Navigate to={'/login'} state={{from: location}} replace/>
         </>
+    } else{
+        loadEmails();
+        return props.children;
     }
-
-    return props.children;
 }

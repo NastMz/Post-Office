@@ -1,6 +1,14 @@
 import IEmail from "../Models/Interfaces/IEmail";
 import {store} from "../Redux/store";
-import {add} from "../Redux/ReducersUtils/reducersList";
+import {
+    add,
+    addUser,
+    loading,
+    removeUser, resetArchive, resetInbox,
+    resetSend,
+    setProfile,
+    unsetLoading
+} from "../Redux/ReducersUtils/reducersList";
 
 const apiUrl = "https://massmail-api.herokuapp.com/api"
 
@@ -344,4 +352,33 @@ export const payload = () => {
     }
 
     return loadJson()
+}
+
+export function loadEmails() {
+    store.dispatch(loading());
+    let emailList = getEmails();
+    let userList = getUsers();
+    let user = payload();
+    store.dispatch(resetSend());
+    store.dispatch(resetInbox());
+    store.dispatch(resetArchive());
+    user.then((u) => {
+        store.dispatch(setProfile({name: u.name, email: u.email}));
+        userList.then((results) => {
+            if (results.hasOwnProperty('users')) {
+                results['users'].forEach((result: { name: string, email: string }) => {
+                    if (result.email !== store.getState().profileReducer.email) {
+                        store.dispatch(removeUser(result.email));
+                        store.dispatch(addUser(result));
+                    }
+                });
+            }
+        });
+    });
+    emailList.then((results) => {
+        getArchivedEmails(results);
+        getInboxEmails(results);
+        getSentEmails(results);
+        store.dispatch(unsetLoading());
+    });
 }

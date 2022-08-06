@@ -72,9 +72,3 @@
     color: var(--main-color);
 }
 
-@media (max-width: 700px) {
-    .mail {
-        padding: 10px 15px 15px 15px;
-    }
-}
-

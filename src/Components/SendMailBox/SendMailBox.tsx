@@ -8,12 +8,12 @@ import {
     resetAlertMessage, resetArchive, resetInbox,
     resetMailBox, resetSearchUser, resetSend, searchIn, searchUser,
     setAlertMessage,
-    setLoading,
+    loading,
     setMailbox,
     showAlert,
     unsetLoading
 } from "../../Redux/ReducersUtils/reducersList";
-import {sendEmail} from "../../API/EmailAPI";
+import {loadEmails, sendEmail} from "../../API/EmailAPI";
 import {UsersList} from "../UsersList/UsersList";
 
 export const SendMailBox: React.FC = () => {
@@ -64,16 +64,13 @@ export const SendMailBox: React.FC = () => {
     const handleClickSend = () => {
         checkForm();
         if (store.getState().alertReducer.message.toString().length === 0) {
-            store.dispatch(setLoading());
+            store.dispatch(loading());
             let email = store.getState().sendMailBoxReducer['email'];
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
             store.dispatch(resetSearchUser());
             sendEmail(email.to, email.subject, email.message).then(() => {
-                store.dispatch(resetSend());
-                store.dispatch(resetInbox());
-                store.dispatch(resetArchive());
-                store.dispatch(unsetLoading());
+                loadEmails();
             });
         } else {
             store.dispatch(showAlert());

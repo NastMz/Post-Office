@@ -292,7 +292,7 @@ const resetArchive = () => {
     }
 };
 
-const setLoading = () => {
+const loading = () => {
     return {
         type: `@load/setLoading`
     }
@@ -344,7 +344,7 @@ export {
     resetInbox,
     resetSend,
     resetArchive,
-    setLoading,
+    loading,
     unsetLoading,
     openMenu,
     closeMenu,
