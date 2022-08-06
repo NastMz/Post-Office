@@ -53,6 +53,18 @@ const resetSearch = () => {
     }
 };
 
+const searchUser = (search: string) => {
+    return {
+        type: '@input/search',
+        payload: search
+    }
+};
+const resetSearchUser = () => {
+    return {
+        type: '@input/resetSearch'
+    }
+};
+
 const markAsRead = (index: number, reducer: string) => {
     return {
         type: `@email${reducer}/markAsRead`,
@@ -182,6 +194,13 @@ const setMailbox = (props: any) => {
             subject: props.subject,
             message: props.message
         }
+    }
+}
+
+const setToMailbox = (email: string) => {
+    return {
+        type: `@sendmailbox/setuser`,
+        payload: email
     }
 }
 
@@ -330,5 +349,8 @@ export {
     openMenu,
     closeMenu,
     openSidebar,
-    closeSidebar
+    closeSidebar,
+    searchUser,
+    resetSearchUser,
+    setToMailbox
 }

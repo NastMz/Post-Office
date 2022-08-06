@@ -5,8 +5,8 @@ import {
     closeMailBox,
     maximizeMailBox,
     minimizeMailBox,
-    resetAlertMessage,
-    resetMailBox,
+    resetAlertMessage, resetArchive, resetInbox,
+    resetMailBox, resetSearchUser, resetSend, searchIn, searchUser,
     setAlertMessage,
     setLoading,
     setMailbox,
@@ -14,6 +14,7 @@ import {
     unsetLoading
 } from "../../Redux/ReducersUtils/reducersList";
 import {sendEmail} from "../../API/EmailAPI";
+import {UsersList} from "../UsersList/UsersList";
 
 export const SendMailBox: React.FC = () => {
 
@@ -67,16 +68,24 @@ export const SendMailBox: React.FC = () => {
             let email = store.getState().sendMailBoxReducer['email'];
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
+            store.dispatch(resetSearchUser());
             sendEmail(email.to, email.subject, email.message).then(() => {
-                // store.dispatch(resetSend());
-                // store.dispatch(resetInbox());
-                // store.dispatch(resetArchive());
+                store.dispatch(resetSend());
+                store.dispatch(resetInbox());
+                store.dispatch(resetArchive());
                 store.dispatch(unsetLoading());
             });
         } else {
             store.dispatch(showAlert());
         }
     };
+
+    useEffect(() => {
+        let regularExpression = /^\w+([.-]?\w+)*@massmail.site$/;
+        if (!regularExpression.test(toEmail)) {
+            store.dispatch(searchUser(toEmail));
+        }
+    }, [toEmail]);
 
     store.subscribe(() => {
         setMinimized(store.getState().sendMailBoxReducer['isMinimized']);
@@ -106,6 +115,7 @@ export const SendMailBox: React.FC = () => {
                     <div className={`to-box`}>
                         <input type={'email'} value={toEmail} placeholder={'Para'}
                                onChange={e => setToEmail(e.currentTarget.value)} autoFocus={isOpen}/>
+                        <UsersList/>
                     </div>
                     <div className={`subject-box`}>
                         <input type={'text'} value={subjectEmail} placeholder={'Asunto'}

@@ -69,6 +69,14 @@ export const sendMailBoxReducer = (state: IMailBoxProps = {
                 },
                 isMinimized: false,
             };
+        case `${reducerName}/setuser`:
+            return {
+                ...state,
+                email: {
+                    ...state.email,
+                    to: action.payload,
+                }
+            };
         default:
             return state;
     }

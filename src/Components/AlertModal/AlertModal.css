@@ -4,11 +4,11 @@
     z-index: 2;
     width: 100vw;
     height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    display: none;
 }
 
 .alert-modal-container {
@@ -47,7 +47,7 @@
     background-color: var(--dark-main-color);
 }
 
-.show {
+.show-modal {
     transform: scale(1);
 }
 
@@ -83,6 +83,10 @@
     .alert-modal {
         width: 100%;
     }
+}
+
+.show-bg {
+    display: flex;
 }
 
 

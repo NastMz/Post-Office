@@ -17,45 +17,36 @@ interface Props {
 export const MainPage: React.FC<Props> = ({element}) => {
 
     const [isLoading, setLoading] = useState<boolean>(true);
-    const [isSending, setSending] = useState<boolean>(false);
-    let emailList = getEmails();
-    let userList = getUsers();
-    let user = payload();
-    user.then((u) => {
-        setLoading(false);
-        store.dispatch(setProfile({name: u.name, email: u.email}));
-    });
-    userList.then((results) => {
-        if (results.hasOwnProperty('users')) {
-            results['users'].forEach((result: { name: string, email: string }) => {
-                store.dispatch(removeUser(result.email));
-                store.dispatch(addUser(result));
+    if (!isLoading) {
+        let emailList = getEmails();
+        let userList = getUsers();
+        let user = payload();
+        user.then((u) => {
+            store.dispatch(setProfile({name: u.name, email: u.email}));
+            userList.then((results) => {
+                if (results.hasOwnProperty('users')) {
+                    results['users'].forEach((result: { name: string, email: string }) => {
+                        if (result.email !== store.getState().profileReducer.email) {
+                            store.dispatch(removeUser(result.email));
+                            store.dispatch(addUser(result));
+                        }
+                    });
+                }
             });
-        }
-    });
-    emailList.then((results) => {
-        if (!isSending) {
-            setLoading(true);
+        });
+        emailList.then((results) => {
             getArchivedEmails(results);
             getInboxEmails(results);
             getSentEmails(results);
-            setLoading(false);
-        }
-    });
+        });
+    }
 
     store.subscribe(() => {
-        setSending(store.getState().loadReducer);
+        setLoading(store.getState().loadReducer);
     })
 
     return (
         <div className={"main-page"}>
-            {
-                isSending ?
-                    <div className={"loader-background"}>
-                        <Loader/>
-                    </div>
-                    : ''
-            }
             <AlertModal/>
             <Navbar/>
             <main>

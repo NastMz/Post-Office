@@ -13,6 +13,7 @@ import {profileReducer} from "./reducers/profileReducer";
 import {loadReducer} from "./reducers/loadReducer";
 import {menuReducer} from "./reducers/menuReducer";
 import {sidebarReducer} from "./reducers/sidebarReducer";
+import {inputBarReducer} from "./reducers/inputBarReducer";
 
 export default combineReducers({
     emailsArchivedReducer,
@@ -28,5 +29,6 @@ export default combineReducers({
     profileReducer,
     loadReducer,
     menuReducer,
-    sidebarReducer
+    sidebarReducer,
+    inputBarReducer
 });

@@ -88,6 +88,7 @@
     border: 1px solid var(--gray-color);
     padding: 10px;
     overflow-y: auto;
+    font-family: 'Roboto', serif;
 }
 
 .mail-form textarea:focus {
@@ -129,4 +130,8 @@
     .mail-box textarea {
         height: 200px;
     }
+}
+
+.to-box {
+    position: relative;
 }

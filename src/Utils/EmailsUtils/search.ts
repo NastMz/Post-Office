@@ -1,7 +1,5 @@
-import IEmail from "../../Models/Interfaces/IEmail";
-
-export function search(state: Array<IEmail>, searchInput: string) {
-    return state.filter((item) => {
+export function search(state: any, searchInput: string) {
+    return state.filter((item: any) => {
         return Object.values(item)
             .join("")
             .toLowerCase()

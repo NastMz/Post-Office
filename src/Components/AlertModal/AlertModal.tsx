@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
 import './AlertModal.css';
 import {store} from "../../Redux/store";
-import {alertDelete, closeAlert, resetAlertMessage} from "../../Redux/ReducersUtils/reducersList";
+import {alertDelete, closeAlert, closeSidebar, resetAlertMessage} from "../../Redux/ReducersUtils/reducersList";
 
 export const AlertModal: React.FC = () => {
 
     const alertRef = useRef<any>(null);
 
     const [isOpen, setOpen] = useState<boolean>(false);
+    const [alertOpen, setAlertOpen] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<Array<string>>([]);
 
     useEffect(() => {
@@ -29,14 +30,26 @@ export const AlertModal: React.FC = () => {
         if (store.getState().alertReducer.message[0] === '¿Esta seguro que desea eliminar este correo?' || store.getState().alertReducer.message[0] === '¿Esta seguro que desea eliminar estos correos?') {
             store.dispatch(alertDelete());
         }
-        store.dispatch(closeAlert());
-        store.dispatch(resetAlertMessage());
+        setAlertOpen(false);
+        setTimeout(()=> {
+            store.dispatch(closeAlert());
+            store.dispatch(resetAlertMessage());
+        }, 300);
     };
 
     const handleClickClose = () => {
-        store.dispatch(closeAlert());
-        store.dispatch(resetAlertMessage());
+        setAlertOpen(false);
+        setTimeout(()=> {
+            store.dispatch(closeAlert());
+            store.dispatch(resetAlertMessage());
+        }, 300);
     };
+
+    useEffect(() => {
+        setTimeout(()=>{
+            setAlertOpen(isOpen);
+        }, 50)
+    }, [isOpen]);
 
     store.subscribe(() => {
         setOpen(store.getState().alertReducer.status);
@@ -44,8 +57,8 @@ export const AlertModal: React.FC = () => {
     });
 
     return (
-        <div className={`alert-modal-background ${isOpen ? 'show' : 'hidde'}`}>
-            <div ref={alertRef} className={`alert-modal-container ${isOpen ? 'show' : 'hidde'}`}>
+        <div className={`alert-modal-background ${isOpen ? 'show-bg' : 'hidde'}`}>
+            <div ref={alertRef} className={`alert-modal-container ${alertOpen ? 'show-modal' : 'hidde'}`}>
                 <div className={`alert-modal`}>
                     <div className={'close-alert-btn'} onClick={handleClickClose}>
                         X
