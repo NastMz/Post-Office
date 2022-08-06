@@ -2,17 +2,17 @@ import React, {useEffect, useState} from "react";
 import './SendMailBox.css';
 import {store} from "../../Redux/store";
 import {
-    add,
     closeMailBox,
     maximizeMailBox,
     minimizeMailBox,
     resetAlertMessage,
     resetMailBox,
     setAlertMessage,
+    setLoading,
     setMailbox,
-    showAlert
+    showAlert,
+    unsetLoading
 } from "../../Redux/ReducersUtils/reducersList";
-import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {sendEmail} from "../../API/EmailAPI";
 
 export const SendMailBox: React.FC = () => {
@@ -63,11 +63,15 @@ export const SendMailBox: React.FC = () => {
     const handleClickSend = () => {
         checkForm();
         if (store.getState().alertReducer.message.toString().length === 0) {
+            store.dispatch(setLoading());
             let email = store.getState().sendMailBoxReducer['email'];
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
             sendEmail(email.to, email.subject, email.message).then(() => {
-                store.dispatch(add(store.getState().sendMailBoxReducer['email'], reducerNames[1]))
+                // store.dispatch(resetSend());
+                // store.dispatch(resetInbox());
+                // store.dispatch(resetArchive());
+                store.dispatch(unsetLoading());
             });
         } else {
             store.dispatch(showAlert());

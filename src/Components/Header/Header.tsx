@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './Header.css';
 import {useLocation} from "react-router-dom";
 import {Paths} from "../../Utils/RoutesUtils/Paths";
 import {store} from "../../Redux/store";
 import {LogoutMenu} from "../LogoutMenu/LogoutMenu";
-import {closeDropdown, closeMenu, openDropdown, openMenu} from "../../Redux/ReducersUtils/reducersList";
+import {closeMenu, openMenu} from "../../Redux/ReducersUtils/reducersList";
 
 export const Header: React.FC = () => {
     const location = useLocation();
@@ -20,7 +20,6 @@ export const Header: React.FC = () => {
     }, [location]);
 
     const displayMenu = () => {
-        debugger
         if (isOpen) {
             store.dispatch(closeMenu());
         } else {
@@ -37,9 +36,10 @@ export const Header: React.FC = () => {
             <div className="page-name">
                 <span>{pageName}</span>
             </div>
-            <div className={"user-container"} onClick={() => displayMenu()}>
+            <div className={"user-container"} onClick={displayMenu}>
                 <div className="user">
-                    <i className="fa fa-user-circle"></i> <span>{userName}</span> <i className={`fa fa-caret-down ${isOpen ? "is-open" : ''}`}></i>
+                    <i className="fa fa-user-circle"></i> <span>{userName}</span> <i
+                    className={`fa fa-caret-down ${isOpen ? "is-open" : ''}`}></i>
                 </div>
                 {
                     isOpen ? <LogoutMenu/> : ''

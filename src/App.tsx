@@ -1,11 +1,10 @@
-import {Route, Routes, Navigate, useLocation} from 'react-router-dom';
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import './App.css';
 import React from "react";
 import {NotFound} from "./Pages/NotFound/NotFound";
 import {Paths} from "./Utils/RoutesUtils/Paths";
 import {Login} from "./Pages/Login/Login";
 import {Register} from "./Pages/Register/Register";
-
 
 
 export default function App() {
@@ -25,8 +24,8 @@ export default function App() {
             <Routes>
                 {/* 404 rounte */}
                 <Route path="*" element={<NotFound/>}/>
-                <Route path={"/login"} element={<Login />}/>
-                <Route path={"/register"} element={<Register />}/>
+                <Route path={"/login"} element={<Login/>}/>
+                <Route path={"/register"} element={<Register/>}/>
                 {paths.map((path) => path)}
             </Routes>
         </div>
@@ -34,20 +33,18 @@ export default function App() {
 }
 
 
-
-
-function AuthRequired(props: any){
+function AuthRequired(props: any) {
     const location = useLocation();
     let token;
     try {
-        token =  window.sessionStorage.getItem('e-token')
-    }catch {
+        token = window.sessionStorage.getItem('e-token')
+    } catch {
         token = ''
     }
 
-    if(!token){
+    if (!token) {
         return <>
-            <Navigate to={'/login'} state={{from: location}} replace  />
+            <Navigate to={'/login'} state={{from: location}} replace/>
         </>
     }
 

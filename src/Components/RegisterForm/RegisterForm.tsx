@@ -5,6 +5,7 @@ import Logo from "../Logo/Logo";
 import {store} from "../../Redux/store";
 import {setAlertMessage, showAlert} from "../../Redux/ReducersUtils/reducersList";
 import {Loader} from "../Loader/Loader";
+import {register} from "../../API/EmailAPI";
 
 export const RegisterForm: React.FC = () => {
 
@@ -43,10 +44,10 @@ export const RegisterForm: React.FC = () => {
             } else {
                 setLoading(true);
                 let newEmail = `${email}@massmail.site`;
-                // register(name, newEmail, password).then(() => {
-                //     setLoading(false);
-                //     navigate('/');
-                // });
+                register(name, newEmail, password).then(() => {
+                    setLoading(false);
+                    navigate('/');
+                });
             }
         };
 

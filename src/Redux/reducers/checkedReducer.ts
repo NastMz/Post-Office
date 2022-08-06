@@ -1,6 +1,6 @@
 const reducerName = `@checked`;
 
-export const checkedReducer = (state: boolean  = false, action: any) => {
+export const checkedReducer = (state: boolean = false, action: any) => {
     switch (action.type) {
         case `${reducerName}/check`:
             return true;

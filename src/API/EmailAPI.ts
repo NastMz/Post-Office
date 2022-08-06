@@ -1,8 +1,8 @@
 import IEmail from "../Models/Interfaces/IEmail";
 import {store} from "../Redux/store";
-import {add, resetArchive, resetInbox, resetSend} from "../Redux/ReducersUtils/reducersList";
+import {add} from "../Redux/ReducersUtils/reducersList";
 
-const apiUrl = "http://localhost:5000/api"
+const apiUrl = "http://3.86.103.183:5000/api"
 
 export function getArchivedEmails(emailList: any) {
     if (emailList.hasOwnProperty('emails')) {

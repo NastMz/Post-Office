@@ -40,7 +40,7 @@ header {
     font-size: .95em;
 }
 
-.user:hover i:last-child{
+.user:hover i:last-child {
     color: var(--main-color);
 }
 

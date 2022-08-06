@@ -1,6 +1,6 @@
 const reducerName = `@menu`;
 
-export const menuReducer = (state: boolean  = false, action: any) => {
+export const menuReducer = (state: boolean = false, action: any) => {
     switch (action.type) {
         case `${reducerName}/open`:
             return true;

@@ -18,8 +18,8 @@ export const LogoutMenu: React.FC = () => {
     };
 
     const handleClick = () => {
-      sessionStorage.removeItem('e-token');
-      navigate('/login');
+        sessionStorage.removeItem('e-token');
+        navigate('/login');
     }
 
     document.addEventListener('mouseup', toggleMenu);

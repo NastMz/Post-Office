@@ -12,10 +12,9 @@ export const Inbox: React.FC = () => {
     const [state, updateState] = useState<Array<IEmail>>(store.getState().emailsInboxReducer);
     // subscribing to the redux store
     store.subscribe(() => {
-        if (store.getState().searchBarReducer === ''){
+        if (store.getState().searchBarReducer === '') {
             updateState(store.getState().emailsInboxReducer);
-        }
-        else {
+        } else {
             updateState(search(store.getState().emailsInboxReducer, store.getState().searchBarReducer))
         }
     });
@@ -23,7 +22,8 @@ export const Inbox: React.FC = () => {
     return (
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[0]}/>
-            {isActive(reducerNames[0]) ? <MailReader props={getActive(reducerNames[0])} reducer={reducerNames[0]}/> : ''}
+            {isActive(reducerNames[0]) ?
+                <MailReader props={getActive(reducerNames[0])} reducer={reducerNames[0]}/> : ''}
         </div>
     )
 };

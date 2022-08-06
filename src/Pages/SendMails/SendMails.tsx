@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {MailList} from "../../Components/MailList/MailList";
 import {store} from "../../Redux/store";
 import {getActive, isActive} from "../../Utils/EmailsUtils/EmailUtils";
@@ -12,10 +12,9 @@ export const SendMails: React.FC = () => {
     const [state, updateState] = useState<Array<IEmail>>(store.getState().emailsSentReducer);
     // subscribing to the redux store
     store.subscribe(() => {
-        if (store.getState().searchBarReducer === ''){
+        if (store.getState().searchBarReducer === '') {
             updateState(store.getState().emailsSentReducer);
-        }
-        else {
+        } else {
             updateState(search(store.getState().emailsSentReducer, store.getState().searchBarReducer))
         }
     });
@@ -24,7 +23,8 @@ export const SendMails: React.FC = () => {
         //<Navigation />
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[1]}/>
-            {isActive(reducerNames[1]) ? <MailReader props={getActive(reducerNames[1])}  reducer={reducerNames[1]}/> : ''}
+            {isActive(reducerNames[1]) ?
+                <MailReader props={getActive(reducerNames[1])} reducer={reducerNames[1]}/> : ''}
         </div>
     )
 };

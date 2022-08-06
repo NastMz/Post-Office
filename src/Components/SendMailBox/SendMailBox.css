@@ -116,10 +116,10 @@
     background-color: var(--dark-main-color);
 }
 
-@media (max-width: 700px){
+@media (max-width: 700px) {
     .mail-box {
         width: 90vw;
-        right: calc(10vw/2);
+        right: calc(10vw / 2);
     }
 
     .open {

@@ -8,7 +8,7 @@ export function isActive(emailsReducer: string) {
 
     switch (emailsReducer) {
         case reducerNames[2]:
-            for(const email of store.getState().emailsArchivedReducer) {
+            for (const email of store.getState().emailsArchivedReducer) {
                 if (email.active) {
                     emailActive = email.active;
                     break;

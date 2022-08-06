@@ -13,10 +13,9 @@ export const ArchiveMails: React.FC = () => {
     const [state, updateState] = useState<Array<IEmail>>(store.getState().emailsArchivedReducer);
     // subscribing to the redux store
     store.subscribe(() => {
-        if (store.getState().searchBarReducer === ''){
+        if (store.getState().searchBarReducer === '') {
             updateState(store.getState().emailsArchivedReducer);
-        }
-        else {
+        } else {
             updateState(search(store.getState().emailsArchivedReducer, store.getState().searchBarReducer))
         }
     });
@@ -24,7 +23,8 @@ export const ArchiveMails: React.FC = () => {
     return (
         <div className={"mails-container"}>
             <MailList state={state} reducer={reducerNames[2]}/>
-            {isActive(reducerNames[2]) ? <MailReader props={getActive(reducerNames[2])}  reducer={reducerNames[2]}/> : ''}
+            {isActive(reducerNames[2]) ?
+                <MailReader props={getActive(reducerNames[2])} reducer={reducerNames[2]}/> : ''}
         </div>
     )
 };

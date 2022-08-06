@@ -90,11 +90,11 @@ export const emailsInboxReducer = (state: Array<IEmail> = [], action: any) => {
             });
         case `${reducerName}/checkAll`:
             return state.map((email) => {
-                    return {
-                        ...email,
-                        selected: true
-                    }
-                });
+                return {
+                    ...email,
+                    selected: true
+                }
+            });
         case `${reducerName}/uncheckAll`:
             return state.map((email) => {
                 return {

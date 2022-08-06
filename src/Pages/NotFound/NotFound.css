@@ -71,7 +71,7 @@
 
 .clouds {
     position: relative;
-    color: rgba(255,255,255,0.2);
+    color: rgba(255, 255, 255, 0.2);
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -127,7 +127,7 @@
 #cloud6 {
     top: 210px;
     left: 200px;
-    transform: scale(0.5)  rotateY(180deg);
+    transform: scale(0.5) rotateY(180deg);
     opacity: 0.5;
     animation: movingclouds 18s linear infinite;
 }
@@ -135,12 +135,16 @@
 #cloud7 {
     top: 140px;
     left: 700px;
-    transform: scale(0.4)  rotateY(180deg);
+    transform: scale(0.4) rotateY(180deg);
     opacity: 0.4;
     animation: movingclouds 20s linear infinite;
 }
 
 @keyframes movingclouds {
-    0% {margin-left: 100%;}
-    100% {margin-left: -150%;}
+    0% {
+        margin-left: 100%;
+    }
+    100% {
+        margin-left: -150%;
+    }
 }

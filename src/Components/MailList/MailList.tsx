@@ -16,8 +16,8 @@ export const MailList: React.FC<Props> = ({state, reducer}) => {
         <div className={`mail-list ${isActive(reducer) ? 'mail-open' : ''}`}>
             {
                 state.length > 0 ?
-                state.map(email => <MailCard props={email} reducer={reducer} key={Math.random()}/>)
-                : <NoEmail/>
+                    state.map(email => <MailCard props={email} reducer={reducer} key={Math.random()}/>)
+                    : <NoEmail/>
 
             }
         </div>
