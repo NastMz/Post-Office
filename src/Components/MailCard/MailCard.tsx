@@ -162,14 +162,14 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
             }
         };
 
-        const handleClickDelete = (index: number) => () => {
+        const handleClickDelete = (index: number) => {
+            setDeleteIndex(index);
             store.dispatch(setAlertMessage(['¿Esta seguro que desea eliminar este correo?']));
             store.dispatch(showAlert());
-            setDeleteIndex(index);
         }
 
         useEffect(() => {
-            if (isDeleting) {
+            if (isDeleting && deleteIndex > 0) {
                 store.dispatch(loading());
                 deleteEmail(deleteIndex.toString()).then(() => {
                     store.dispatch(deleteDone());
@@ -177,21 +177,20 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                     loadEmails();
                 });
             }
-        }, [isDeleting]);
+        }, [deleteIndex, isDeleting])
 
         store.subscribe(() => {
             setDeleting(store.getState().alertReducer.delete);
-        });
+        })
 
         return (
-            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}
-                 onClick={handleClickCard(props.index)}>
+            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}>
                 <div className={"email-header"}>
                     <div className={"user-from"}>
                         <i className={"fa fa-user-circle"}></i>
                         <span className="from">{reducer === 'Inbox' ? props.from_name : props.to_name}</span>
                     </div>
-                    <i className={`fa fa-arrow-right see`}></i>
+                    <i className={`fa fa-arrow-right see`} onClick={handleClickCard(props.index)}></i>
                 </div>
                 <span className={"subject"}>{props.subject}</span>
                 <p className={"message"}>{props.message.length < 100 ? props.message : props.message.substring(0, 200).concat('...')}</p>
@@ -202,7 +201,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                            onClick={handleClickImportant(props.index)}></i>
                         <i className={`fa fa-archive ${props.archive ? 'archive' : ''}`}
                            onClick={handleClickArchive(props.index)}></i>
-                        <i className={"fa fa-trash delete"} onClick={handleClickDelete(props.index)}></i>
+                        <i className={"fa fa-trash delete"} onClick={() => handleClickDelete(props.index)}></i>
                     </div>
                     <div className={"date"}>
                         <span>{props.date}</span>

@@ -21,8 +21,11 @@ export const AlertModal: React.FC = () => {
 
     const handleClickBackground = (e: MouseEvent) => {
         if (alertRef.current && store.getState().alertReducer.status && !alertRef.current.contains(e.target)) {
-            store.dispatch(closeAlert());
-            store.dispatch(resetAlertMessage());
+            setAlertOpen(false);
+            setTimeout(() => {
+                store.dispatch(closeAlert());
+                store.dispatch(resetAlertMessage());
+            }, 300);
         }
     };
 

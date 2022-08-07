@@ -4,7 +4,6 @@ import {
     add,
     addUser,
     isUncheck,
-    loading,
     removeUser,
     resetArchive,
     resetInbox,
@@ -414,7 +413,6 @@ export function loadEmails() {
         });
     });
     emailList.then((results) => {
-        store.dispatch(loading());
         store.dispatch(resetSend());
         store.dispatch(resetInbox());
         store.dispatch(resetArchive());
@@ -428,7 +426,7 @@ export function loadEmails() {
 
 export function refresh() {
     setInterval(() => {
-        if (!store.getState().checkedReducer && !store.getState().loadReducer && !store.getState().alertReducer.status) {
+        if (!store.getState().checkedReducer && !store.getState().loadReducer && !store.getState().alertReducer.status && !store.getState().readReducer) {
             let emailList = getEmails();
             let userList = getUsers();
             let user = payload();
@@ -451,5 +449,5 @@ export function refresh() {
                 getSentEmails(results);
             });
         }
-    }, 10000);
+    }, 1000);
 }

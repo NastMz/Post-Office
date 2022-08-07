@@ -194,6 +194,7 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
+                                loadEmails();
                             });
                         }
                     });
@@ -203,6 +204,7 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsSentReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
+                                loadEmails();
                             });
                         }
                     });
@@ -212,13 +214,13 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
+                                loadEmails();
                             });
                         }
                     });
                     break;
             }
             store.dispatch(deleteDone());
-            loadEmails();
         }
     }
 

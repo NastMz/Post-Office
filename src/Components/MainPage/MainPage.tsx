@@ -8,11 +8,13 @@ import {AlertModal} from "../AlertModal/AlertModal";
 import {loadEmails, refresh} from "../../API/EmailAPI";
 import {store} from "../../Redux/store";
 import {Loader} from "../Loader/Loader";
+import {loading} from "../../Redux/ReducersUtils/reducersList";
 
 interface Props {
     element: React.ReactElement
 }
 
+store.dispatch(loading());
 loadEmails();
 refresh();
 
