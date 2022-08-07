@@ -5,7 +5,7 @@ import {setAlertMessage, setProfile, showAlert} from "../../Redux/ReducersUtils/
 import {store} from "../../Redux/store";
 import Logo from "../Logo/Logo";
 import {Loader} from "../Loader/Loader";
-import {login, payload} from "../../API/EmailAPI";
+import {loadEmails, login, payload} from "../../API/EmailAPI";
 
 export const LoginForm: React.FC = () => {
 
@@ -44,6 +44,7 @@ export const LoginForm: React.FC = () => {
                     user.then((u) => {
                         setLoading(false);
                         store.dispatch(setProfile({name: u.name, email: u.email}));
+                        loadEmails();
                         navigate('/');
                     });
                 } else {

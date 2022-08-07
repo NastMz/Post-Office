@@ -25,9 +25,9 @@ export const RegisterForm: React.FC = () => {
                 alerts.push('El nombre no puede contener caracteres especiales o numeros.')
             }
 
-            if (!/\w+/.test(email) && !/^(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s])/.test(email)) {
+            if (!/\w+/.test(email) && !/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~])/.test(email)) {
                 alerts.push('El correo no puede estar vacio.')
-            } else if (/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\S])/.test(email)) {
+            } else if (/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~])|(\S*$)/.test(email)) {
                 alerts.push('El correo no puede contener caracteres especiales o espacios.')
             }
 

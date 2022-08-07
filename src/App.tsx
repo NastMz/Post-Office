@@ -9,7 +9,6 @@ import {loadEmails} from "./API/EmailAPI";
 
 
 export default function App() {
-
     let paths: Array<any> = [];
     Paths.forEach((path) => {
         paths.push(<Route path={path.pathname} element={
@@ -48,7 +47,6 @@ function AuthRequired(props: any) {
             <Navigate to={'/login'} state={{from: location}} replace/>
         </>
     } else{
-        loadEmails();
         return props.children;
     }
 }
