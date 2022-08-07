@@ -6,7 +6,9 @@ import './Assets/fonts/fontawesome/fontawesome-free-6.1.1-web/css/all.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {loadEmails} from "./API/EmailAPI";
+import {loadEmails, refresh} from "./API/EmailAPI";
+import {store} from "./Redux/store";
+import {loading} from "./Redux/ReducersUtils/reducersList";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

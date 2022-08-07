@@ -1,10 +1,9 @@
 .options {
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
-    width: 100%;
-    margin-right: 30px;
+    width: fit-content;
 }
 
 .option-menu {
@@ -54,14 +53,6 @@
 
 .dropdown-header {
     font-size: 20px;
-}
-
-@media (max-width: 700px) {
-    .option-btn {
-        padding: 4px;
-    }
-
-    .options {
-        margin-right: 10px;
-    }
+    display: flex;
+    gap: 5px;
 }

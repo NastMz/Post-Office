@@ -3,15 +3,16 @@ import './SendMailBox.css';
 import {store} from "../../Redux/store";
 import {
     closeMailBox,
+    loading,
     maximizeMailBox,
     minimizeMailBox,
-    resetAlertMessage, resetArchive, resetInbox,
-    resetMailBox, resetSearchUser, resetSend, searchIn, searchUser,
+    resetAlertMessage,
+    resetMailBox,
+    resetSearchUser,
+    searchUser,
     setAlertMessage,
-    loading,
     setMailbox,
-    showAlert,
-    unsetLoading
+    showAlert
 } from "../../Redux/ReducersUtils/reducersList";
 import {loadEmails, sendEmail} from "../../API/EmailAPI";
 import {UsersList} from "../UsersList/UsersList";
@@ -39,6 +40,17 @@ export const SendMailBox: React.FC = () => {
     const handleClickMaximize = () => {
         store.dispatch(maximizeMailBox());
     };
+
+    const handleClickHeader = () => {
+        setTimeout(() => {
+            if (isMinimized) {
+                store.dispatch(maximizeMailBox());
+            } else {
+                store.dispatch(minimizeMailBox());
+            }
+        }, 150);
+    };
+
 
     const handleClickClose = () => {
         store.dispatch(resetAlertMessage());
@@ -94,7 +106,7 @@ export const SendMailBox: React.FC = () => {
 
     return (
         <div className={`mail-box ${isOpen ? 'open' : ''}`}>
-            <div className={'mail-box-header'}>
+            <div className={'mail-box-header'} onClick={handleClickHeader}>
                 <div className={'mail-box-title'}>
                     Mensaje nuevo
                 </div>

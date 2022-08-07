@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './Navbar.css';
 import {Link, useLocation} from "react-router-dom";
 import {Paths} from '../../Utils/RoutesUtils/Paths';
 import Logo from "../Logo/Logo";
 import {store} from "../../Redux/store";
 import {
+    closeAlert,
     closeDropdown,
     closeSidebar,
     isUncheck,
     openMailBox,
     openPage,
+    resetAlertMessage,
     resetSearch,
     unmarkAsSelected
 } from "../../Redux/ReducersUtils/reducersList";
@@ -20,6 +22,7 @@ import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 export const Navbar: React.FC = () => {
 
     const location = useLocation();
+    const barRef = useRef<any>(null);
 
     const [unread, setUnread] = useState<number>(store.getState().emailsInboxReducer.filter(email => !email.read).length);
     const [activeIndex, setActiveIndex] = useState<Path>(store.getState().navbarReducer);
@@ -62,7 +65,7 @@ export const Navbar: React.FC = () => {
 
     const handleClickRedact = () => {
         if (isOpen) {
-            store.dispatch(closeSidebar());
+            handleClickClose();
         }
         store.dispatch(openMailBox());
     };
@@ -75,15 +78,26 @@ export const Navbar: React.FC = () => {
 
     const handleClickClose = () => {
         setOpenNav(false);
-        setTimeout(()=> {
+        setTimeout(() => {
             store.dispatch(closeSidebar());
         }, 300);
     };
 
+    const handleClickBackground = (e: MouseEvent) => {
+        if (barRef.current && store.getState().sidebarReducer && !barRef.current.contains(e.target)) {
+            handleClickClose();
+        }
+    };
+
     useEffect(() => {
-        setTimeout(()=>{
+        setTimeout(() => {
             setOpenNav(isOpen);
-        }, 50)
+        }, 50);
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickBackground);
+        } else {
+            document.removeEventListener('mousedown', handleClickBackground);
+        }
     }, [isOpen]);
 
     store.subscribe(() => {
@@ -94,7 +108,7 @@ export const Navbar: React.FC = () => {
 
     return (
         <div className={`nav-background ${isOpen ? 'open-nav' : ''}`}>
-            <nav className={`${openNav ? 'show-nav' : ''}`}>
+            <nav ref={barRef} className={`${openNav ? 'show-nav' : ''}`}>
                 <div className={"close-nav show"}>
                     <i className={"fa fa-close"} onClick={() => handleClickClose()}></i>
                 </div>

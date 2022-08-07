@@ -303,6 +303,17 @@ const unsetLoading = () => {
     }
 }
 
+const reading = () => {
+    return {
+        type: `@read/setReading`
+    }
+}
+const unsetReading = () => {
+    return {
+        type: `@read/unsetReading`
+    }
+}
+
 
 export {
     openPage,
@@ -352,5 +363,7 @@ export {
     closeSidebar,
     searchUser,
     resetSearchUser,
-    setToMailbox
+    setToMailbox,
+    reading,
+    unsetReading
 }

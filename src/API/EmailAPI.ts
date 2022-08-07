@@ -3,8 +3,11 @@ import {store} from "../Redux/store";
 import {
     add,
     addUser,
+    isUncheck,
     loading,
-    removeUser, resetArchive, resetInbox,
+    removeUser,
+    resetArchive,
+    resetInbox,
     resetSend,
     setProfile,
     unsetLoading
@@ -12,8 +15,30 @@ import {
 
 const apiUrl = "https://massmail-api.herokuapp.com/api"
 
+function padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+}
+
+function getDate(date: string) {
+    let days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+    let months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'diciembre']
+    let d = new Date(date);
+    let dayName = days[d.getDay()];
+    let fullDate = [padTo2Digits(d.getDate()), months[d.getMonth()], d.getFullYear()].join(' de ');
+    return [dayName, fullDate].join(", ");
+}
+
+function sort(emails: Array<IEmail>) {
+    return emails.sort((a, b) => {
+        let dateA = new Date(a.date);
+        let dateB = new Date(b.date)
+        return dateB.getTime() - dateA.getTime();
+    });
+}
+
 export function getArchivedEmails(emailList: any) {
     if (emailList.hasOwnProperty('emails')) {
+        let emails: Array<IEmail> = [];
         emailList['emails'].forEach((email: IEmail) => {
             if (email.archive) {
                 let exist = false;
@@ -23,15 +48,21 @@ export function getArchivedEmails(emailList: any) {
                     }
                 })
                 if (!exist) {
-                    store.dispatch(add(email, 'Archived'));
+                    emails.push(email);
                 }
             }
         });
+        emails = sort(emails);
+        emails.forEach((email) => {
+            email.date = getDate(email.date);
+            store.dispatch(add(email, 'Archived'));
+        })
     }
 }
 
 export function getInboxEmails(emailList: any) {
     if (emailList.hasOwnProperty('emails')) {
+        let emails: Array<IEmail> = [];
         emailList['emails'].forEach((email: IEmail) => {
             if (!email.archive && email.context === 'inbox') {
                 let exist = false;
@@ -41,15 +72,21 @@ export function getInboxEmails(emailList: any) {
                     }
                 })
                 if (!exist) {
-                    store.dispatch(add(email, 'Inbox'));
+                    emails.push(email);
                 }
             }
         });
+        emails = sort(emails);
+        emails.forEach((email) => {
+            email.date = getDate(email.date);
+            store.dispatch(add(email, 'Inbox'));
+        })
     }
 }
 
 export function getSentEmails(emailList: any) {
     if (emailList.hasOwnProperty('emails')) {
+        let emails: Array<IEmail> = [];
         emailList['emails'].forEach((email: IEmail) => {
             if (!email.archive && email.context === 'send') {
                 let exist = false;
@@ -59,10 +96,15 @@ export function getSentEmails(emailList: any) {
                     }
                 })
                 if (!exist) {
-                    store.dispatch(add(email, 'Sent'));
+                    emails.push(email);
                 }
             }
         });
+        emails = sort(emails);
+        emails.forEach((email) => {
+            email.date = getDate(email.date);
+            store.dispatch(add(email, 'Sent'));
+        })
     }
 }
 
@@ -355,13 +397,9 @@ export const payload = () => {
 }
 
 export function loadEmails() {
-    store.dispatch(loading());
     let emailList = getEmails();
     let userList = getUsers();
     let user = payload();
-    store.dispatch(resetSend());
-    store.dispatch(resetInbox());
-    store.dispatch(resetArchive());
     user.then((u) => {
         store.dispatch(setProfile({name: u.name, email: u.email}));
         userList.then((results) => {
@@ -376,9 +414,42 @@ export function loadEmails() {
         });
     });
     emailList.then((results) => {
+        store.dispatch(loading());
+        store.dispatch(resetSend());
+        store.dispatch(resetInbox());
+        store.dispatch(resetArchive());
         getArchivedEmails(results);
         getInboxEmails(results);
         getSentEmails(results);
         store.dispatch(unsetLoading());
+        store.dispatch(isUncheck());
     });
+}
+
+export function refresh() {
+    setInterval(() => {
+        if (!store.getState().checkedReducer && !store.getState().loadReducer && !store.getState().alertReducer.status) {
+            let emailList = getEmails();
+            let userList = getUsers();
+            let user = payload();
+            user.then((u) => {
+                store.dispatch(setProfile({name: u.name, email: u.email}));
+                userList.then((results) => {
+                    if (results.hasOwnProperty('users')) {
+                        results['users'].forEach((result: { name: string, email: string }) => {
+                            if (result.email !== store.getState().profileReducer.email) {
+                                store.dispatch(removeUser(result.email));
+                                store.dispatch(addUser(result));
+                            }
+                        });
+                    }
+                });
+            });
+            emailList.then((results) => {
+                getArchivedEmails(results);
+                getInboxEmails(results);
+                getSentEmails(results);
+            });
+        }
+    }, 10000);
 }

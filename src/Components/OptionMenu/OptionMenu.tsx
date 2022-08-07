@@ -8,21 +8,18 @@ import {
     deleteDone,
     isCheck,
     isUncheck,
-    openDropdown,
-    resetArchive,
-    resetInbox,
-    resetSend,
-    setAlertMessage,
     loading,
+    openDropdown,
+    setAlertMessage,
     showAlert,
     uncheckAll,
-    unmarkAsActive,
-    unsetLoading
+    unmarkAsActive
 } from "../../Redux/ReducersUtils/reducersList";
 import IEmail from "../../Models/Interfaces/IEmail";
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {
-    deleteEmail, loadEmails,
+    deleteEmail,
+    loadEmails,
     setEmailAsArchived,
     setEmailAsImportant,
     unsetEmailAsArchived,
@@ -189,12 +186,6 @@ export const OptionMenu: React.FC = () => {
         store.dispatch(showAlert());
     };
 
-    const setStatusChecked = () => {
-        if (isChecked !== store.getState().checkedReducer) {
-            setChecked(store.getState().checkedReducer);
-        }
-    }
-
     const deleteItems = () => {
         if (isDeleting) {
             switch (store.getState().navbarReducer.index) {
@@ -203,7 +194,6 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsInboxReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
-                                loadEmails();
                             });
                         }
                     });
@@ -213,7 +203,6 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsSentReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
-                                loadEmails();
                             });
                         }
                     });
@@ -223,13 +212,13 @@ export const OptionMenu: React.FC = () => {
                     store.getState().emailsArchivedReducer.forEach((email: IEmail) => {
                         if (email.selected) {
                             deleteEmail(email.index.toString()).then(() => {
-                                loadEmails();
                             });
                         }
                     });
                     break;
             }
             store.dispatch(deleteDone());
+            loadEmails();
         }
     }
 
@@ -239,7 +228,7 @@ export const OptionMenu: React.FC = () => {
 
     store.subscribe(() => {
         setOpen(store.getState().dropdownReducer);
-        setStatusChecked();
+        setChecked(store.getState().checkedReducer);
         setDeleting(store.getState().alertReducer.delete);
     });
 

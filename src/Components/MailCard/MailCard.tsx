@@ -16,7 +16,7 @@ import {
     showAlert,
     unmarkAsActive,
     unmarkAsSelected,
-    unsetLoading
+    unsetLoading, reading
 } from "../../Redux/ReducersUtils/reducersList";
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {
@@ -46,6 +46,7 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
                 store.dispatch(markAsActive(index, reducer));
                 setEmailAsRead(index.toString()).then(() => {
                     store.dispatch(markAsRead(index, reducer));
+                    store.dispatch(reading());
                 })
             }
         };
@@ -185,13 +186,13 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
         });
 
         return (
-            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}>
+            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`} onClick={handleClickCard(props.index)}>
                 <div className={"email-header"}>
                     <div className={"user-from"}>
                         <i className={"fa fa-user-circle"}></i>
                         <span className="from">{reducer === 'Inbox' ? props.from_name : props.to_name}</span>
                     </div>
-                    <i className={`fa fa-arrow-right see`} onClick={handleClickCard(props.index)}></i>
+                    <i className={`fa fa-arrow-right see`}></i>
                 </div>
                 <span className={"subject"}>{props.subject}</span>
                 <p className={"message"}>{props.message.length < 100 ? props.message : props.message.substring(0, 200).concat('...')}</p>

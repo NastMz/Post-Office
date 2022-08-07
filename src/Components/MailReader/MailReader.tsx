@@ -3,7 +3,7 @@ import './MailReader.css';
 import IEmail from "../../Models/Interfaces/IEmail";
 import {getActive} from "../../Utils/EmailsUtils/EmailUtils";
 import {store} from "../../Redux/store";
-import {unmarkAsActive} from "../../Redux/ReducersUtils/reducersList";
+import {unmarkAsActive, unsetReading} from "../../Redux/ReducersUtils/reducersList";
 
 interface Props {
     props: IEmail,
@@ -15,6 +15,7 @@ export const MailReader: React.FC<Props> = ({props, reducer}) => {
     const handleClose = () => {
         if (getActive(reducer).index === props.index) {
             store.dispatch(unmarkAsActive(props.index, reducer));
+            store.dispatch(unsetReading());
         }
     }
 
