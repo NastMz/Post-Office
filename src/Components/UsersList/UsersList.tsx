@@ -2,14 +2,14 @@ import './UsersList.css';
 import React, {useState} from "react";
 import {store} from "../../Redux/store";
 import {search} from "../../Utils/EmailsUtils/search";
-import {resetSearchUser, searchUser, setProfile, setToMailbox} from "../../Redux/ReducersUtils/reducersList";
+import {resetSearchUser, setToMailbox} from "../../Redux/ReducersUtils/reducersList";
 
 export const UsersList: React.FC = () => {
 
     const [userList, setUsersList] = useState<Array<any>>([]);
 
     store.subscribe(() => {
-        if(store.getState().inputBarReducer !== ''){
+        if (store.getState().inputBarReducer !== '') {
             setUsersList(search(store.getState().usersReducer, store.getState().inputBarReducer))
         } else {
             setUsersList([]);

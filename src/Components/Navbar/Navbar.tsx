@@ -5,13 +5,11 @@ import {Paths} from '../../Utils/RoutesUtils/Paths';
 import Logo from "../Logo/Logo";
 import {store} from "../../Redux/store";
 import {
-    closeAlert,
     closeDropdown,
     closeSidebar,
     isUncheck,
     openMailBox,
     openPage,
-    resetAlertMessage,
     resetSearch,
     unmarkAsSelected
 } from "../../Redux/ReducersUtils/reducersList";

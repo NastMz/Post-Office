@@ -152,7 +152,7 @@
     }
 }
 
-@media (max-width:450px) {
+@media (max-width: 450px) {
     .input i {
         top: 28%;
         left: 6%;

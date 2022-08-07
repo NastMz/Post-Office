@@ -5,22 +5,20 @@ import {store} from "../../Redux/store";
 import {getActive} from "../../Utils/EmailsUtils/EmailUtils";
 import {
     deleteDone,
+    loading,
     markAsActive,
     markAsRead,
     markAsSelected,
-    resetArchive,
-    resetInbox,
-    resetSend,
+    reading,
     setAlertMessage,
-    loading,
     showAlert,
     unmarkAsActive,
-    unmarkAsSelected,
-    unsetLoading, reading
+    unmarkAsSelected
 } from "../../Redux/ReducersUtils/reducersList";
 import {reducerNames} from "../../Redux/ReducersUtils/reducerNames";
 import {
-    deleteEmail, loadEmails,
+    deleteEmail,
+    loadEmails,
     setEmailAsArchived,
     setEmailAsImportant,
     setEmailAsRead,
@@ -186,7 +184,8 @@ export const MailCard: React.FC<Props> = ({props, reducer}) => {
         });
 
         return (
-            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`} onClick={handleClickCard(props.index)}>
+            <div className={`mail-card ${props.read ? "read" : ''} ${props.active ? "active" : ''}`}
+                 onClick={handleClickCard(props.index)}>
                 <div className={"email-header"}>
                     <div className={"user-from"}>
                         <i className={"fa fa-user-circle"}></i>

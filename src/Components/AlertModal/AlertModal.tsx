@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import './AlertModal.css';
 import {store} from "../../Redux/store";
-import {alertDelete, closeAlert, closeSidebar, resetAlertMessage} from "../../Redux/ReducersUtils/reducersList";
+import {alertDelete, closeAlert, resetAlertMessage} from "../../Redux/ReducersUtils/reducersList";
 
 export const AlertModal: React.FC = () => {
 
@@ -31,7 +31,7 @@ export const AlertModal: React.FC = () => {
             store.dispatch(alertDelete());
         }
         setAlertOpen(false);
-        setTimeout(()=> {
+        setTimeout(() => {
             store.dispatch(closeAlert());
             store.dispatch(resetAlertMessage());
         }, 300);
@@ -39,14 +39,14 @@ export const AlertModal: React.FC = () => {
 
     const handleClickClose = () => {
         setAlertOpen(false);
-        setTimeout(()=> {
+        setTimeout(() => {
             store.dispatch(closeAlert());
             store.dispatch(resetAlertMessage());
         }, 300);
     };
 
     useEffect(() => {
-        setTimeout(()=>{
+        setTimeout(() => {
             setAlertOpen(isOpen);
         }, 50)
     }, [isOpen]);

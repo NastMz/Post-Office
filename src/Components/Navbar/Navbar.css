@@ -118,6 +118,7 @@ nav li i {
         left: -300px;
         transition: 0.3s;
     }
+
     .nav-background {
         position: absolute;
         z-index: 1;
@@ -126,12 +127,15 @@ nav li i {
         height: 100%;
         display: none;
     }
+
     .show {
         display: flex;
     }
+
     .open-nav {
         display: block;
     }
+
     .show-nav {
         left: 0;
     }
