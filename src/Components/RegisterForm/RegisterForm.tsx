@@ -17,6 +17,8 @@ export const RegisterForm: React.FC = () => {
         const [isLoading, setLoading] = useState<boolean>(false);
 
         const handleClickSubmit = () => {
+            setEmail(email.replace(/\s+/g, ''));
+            setPassword(password.replace(/\s+/g, ''));
             let alerts: Array<string> = []
 
             if (!/\w+/.test(name) && !/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\d])/.test(name)) {
@@ -27,11 +29,11 @@ export const RegisterForm: React.FC = () => {
 
             if (!/\w+/.test(email) && !/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~])/.test(email)) {
                 alerts.push('El correo no puede estar vacio.')
-            } else if (/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~])|(\S*$)/.test(email)) {
-                alerts.push('El correo no puede contener caracteres especiales o espacios.')
+            } else if (/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s])/.test(email)) {
+                alerts.push('El correo no puede contener caracteres especiales.')
             }
 
-            if (!/\w+/.test(password) && !/^(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s])/.test(password)) {
+            if (!/\w+/.test(password) && !/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s])/.test(password)) {
                 alerts.push('La contraseña no puede estar vacia.')
             } else if (!/(?=.*\w+)(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s]).{8,}/.test(password)) {
                 alerts.push('La contraseña debe tener minimo 8 caracteres.')
