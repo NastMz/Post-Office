@@ -81,7 +81,7 @@ export const SendMailBox: React.FC = () => {
             store.dispatch(resetMailBox());
             store.dispatch(resetSearchUser());
             sendEmail(email.to, email.subject, email.message).then(() => {
-                loadEmails();
+
             });
         } else {
             store.dispatch(showAlert());
