@@ -35,7 +35,7 @@ export const RegisterForm: React.FC = () => {
 
             if (!/\w+/.test(password) && !/(?=.*[?:.*\[@$¡\-_,{}+\]/()\\&%#"'`=<>°¬~\s])/.test(password)) {
                 alerts.push('La contraseña no puede estar vacia.')
-            } else if (!/\w+.{8,}/.test(password)) {
+            } else if (!/\w+.{7,}/.test(password)) {
                 alerts.push('La contraseña debe tener minimo 8 caracteres.')
             }
 

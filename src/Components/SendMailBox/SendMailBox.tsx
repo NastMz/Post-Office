@@ -76,7 +76,6 @@ export const SendMailBox: React.FC = () => {
     const handleClickSend = () => {
         checkForm();
         if (store.getState().alertReducer.message.toString().length === 0) {
-            store.dispatch(loading());
             let email = store.getState().sendMailBoxReducer['email'];
             store.dispatch(closeMailBox());
             store.dispatch(resetMailBox());
