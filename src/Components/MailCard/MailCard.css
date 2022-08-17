@@ -48,6 +48,7 @@
 .message {
     color: var(--gray-color);
     font-size: 0.8em;
+    white-space: pre-wrap;
 }
 
 .email-footer {

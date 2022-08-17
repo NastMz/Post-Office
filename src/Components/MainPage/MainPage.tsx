@@ -14,10 +14,6 @@ interface Props {
     element: React.ReactElement
 }
 
-store.dispatch(loading());
-loadEmails();
-refresh();
-
 export const MainPage: React.FC<Props> = ({element}) => {
 
     const [isLoading, setLoading] = useState<boolean>(true);

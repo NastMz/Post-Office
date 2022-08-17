@@ -12,7 +12,7 @@ import {
     unsetLoading
 } from "../Redux/ReducersUtils/reducersList";
 
-const apiUrl = "https://massmail-api.herokuapp.com/api"
+const apiUrl = "http://localhost:5000/api"
 
 function padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
@@ -449,5 +449,5 @@ export function refresh() {
                 getSentEmails(results);
             });
         }
-    }, 1000);
+    }, 2000);
 }

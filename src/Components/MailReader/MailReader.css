@@ -60,6 +60,7 @@
 .email-message {
     margin-top: 40px;
     color: var(--dark-gray-color);
+    white-space: pre-wrap;
 }
 
 .close-icon {
