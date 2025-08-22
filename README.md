@@ -56,21 +56,6 @@ npm run build
 npm run preview
 ```
 
-## Estructura del Proyecto
-
-```
-Post-Office/
-├── src/
-│   ├── components/     # Componentes reutilizables
-│   ├── pages/         # Páginas principales
-│   ├── services/      # Servicios API
-│   ├── styles/        # Archivos CSS
-│   └── utils/         # Utilidades
-├── public/            # Archivos estáticos
-├── package.json       # Dependencias y scripts
-└── tsconfig.json      # Configuración TypeScript
-```
-
 ## API Integration
 
 Este frontend se conecta con la API backend disponible en: [Post-Office-API](https://github.com/NastMz/Post-Office-API)
